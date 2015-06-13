@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: HazzardWeb
+        psr4_prefix: HazzardWeb
+        src_path: app
