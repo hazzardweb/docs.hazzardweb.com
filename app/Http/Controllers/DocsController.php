@@ -40,15 +40,19 @@ class DocsController extends Controller
 	 */
 	public function show($manual, $version = null, $page = null)
 	{
-		if (is_null($version)) {
+        if (is_null($version)) {
 			$version = $this->docs->getDefaultVersion($manual);
 
 			return redirect()->route('docs.show', [$manual, $version]);
 		}
 
+        if (is_null($page)) {
+            $page = 'installation';
+        }
+
 		$toc            = $this->docs->getToc($manual, $version);
-		$content        = $this->docs->get($manual, $version, $page ?: 'introduction');
-		$lastUpdated    = $this->docs->getUpdatedTimestamp($manual, $version, $page ?: 'introduction');
+		$content        = $this->docs->get($manual, $version, $page);
+		$lastUpdated    = $this->docs->getUpdatedTimestamp($manual, $version, $page);
 		$currentManual  = $manual;
 		$currentVersion = $version;
 		$manuals        = $this->docs->getManuals();
@@ -61,7 +65,8 @@ class DocsController extends Controller
 			'currentManual',
 			'currentVersion',
 			'manuals',
-			'versions'
+			'versions',
+            'page'
 		));
 	}
 }

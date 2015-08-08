@@ -2,22 +2,24 @@
 
 @section('content')
 	<div class="container">
-		<div class="row">
-			@if (! is_null($toc))
-				<div id="sidebar" class="col-md-3">
-					<nav class="toc">
-						{!! $toc !!}
-					</nav>
-				</div>
-			@endif
+		<div class="col-md-11 col-md-offset-1">
+            <div class="row">
+    			@if ($toc)
+    				<div class="col-md-3 docs-sidebar">
+    					<nav class="docs-toc" data-current-page="{{ $page }}">
+    						{!! $toc !!}
+    					</nav>
+    				</div>
+    			@endif
 
-			<div class="col-md-{{ is_null($toc) ? '12' : '9' }} documentation">
-				<p class="pull-right">
-					<small>{{ $lastUpdated }}</small>
-				</p>
+    			<div class="col-md-{{ $toc ? '9' : '12' }} docs-content">
+    				<p class="pull-right">
+    					<small>{{ $lastUpdated }}</small>
+    				</p>
 
-				{!! $content !!}
-			</div>
-		</div>
+    				{!! $content !!}
+    			</div>
+    		</div>
+        </div>
 	</div>
 @stop

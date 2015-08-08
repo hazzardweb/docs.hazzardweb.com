@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"replace",
+				"replaceAll〔function〕"
+			],
+			[
+				"listst",
+				"list-style"
+			],
+			[
 				"font",
 				"font-size"
 			],
@@ -506,40 +514,64 @@
 			[
 				"action",
 				"action_param"
-			],
-			[
-				"ary_se",
-				"array_set"
-			],
-			[
-				"plugi",
-				"plugin_imgPicker"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "app/Http/Middleware/Authenticate.php",
+			"file": "resources/assets/less/docs.less",
 			"settings":
 			{
-				"buffer_size": 896,
+				"buffer_size": 3771,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Http/routes.php",
+			"file": "config/docs.php",
 			"settings":
 			{
-				"buffer_size": 914,
+				"buffer_size": 1689,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/src/GitList/Controller/MainController.php",
+			"file": "resources/views/docs/navbar.blade.php",
 			"settings":
 			{
-				"buffer_size": 5166,
+				"buffer_size": 2495,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/assets/js/docs.js",
+			"settings":
+			{
+				"buffer_size": 2940,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/docs/show.blade.php",
+			"settings":
+			{
+				"buffer_size": 462,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/docs/flat/filepicker/1.0/installation.md",
+			"settings":
+			{
+				"buffer_size": 1765,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/docs/flat/filepicker/1.0/toc.md",
+			"settings":
+			{
+				"buffer_size": 751,
 				"line_ending": "Unix"
 			}
 		}
@@ -551,10 +583,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 293.0,
-		"last_filter": "instal",
+		"height": 400.0,
+		"last_filter": "rub",
 		"selected_items":
 		[
+			[
+				"rub",
+				"Set Syntax: Ruby"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
 			[
 				"instal",
 				"Package Control: Install Package"
@@ -582,10 +622,6 @@
 			[
 				"text",
 				"Set Syntax: Plain Text"
-			],
-			[
-				"php",
-				"Set Syntax: PHP"
 			],
 			[
 				"c++",
@@ -668,10 +704,6 @@
 				"Set Syntax: CSS"
 			],
 			[
-				"rub",
-				"Set Syntax: Ruby"
-			],
-			[
 				"rb",
 				"Set Syntax: Ruby"
 			],
@@ -716,7 +748,7 @@
 				"Set Syntax: PHP"
 			]
 		],
-		"width": 536.0
+		"width": 408.0
 	},
 	"console":
 	{
@@ -739,12 +771,55 @@
 	[
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Controllers",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Middleware"
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/js",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/js/vendor",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/docs",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/docs"
 	],
 	"file_history":
 	[
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/js/vendor/prism.js",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/docs/callouts.less",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/docs/prism.less",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/public/docs/flat/filepicker/1.0/quick.md",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/gulpfile.js",
+		"/C/Users/Cretu Eusebiu/Downloads/prism (1).js",
+		"/C/Users/Cretu Eusebiu/Downloads/prism.css",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/bower.json",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/js/docs.js",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/docs/show.blade.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/config/docs.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Controllers/DocsController.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/docs/master.blade.php",
+		"/C/Users/Cretu Eusebiu/Downloads/prism.js",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/docs/navbar.blade.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/DocsRepository.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/GitDocsRepository.php",
+		"/C/Users/Cretu Eusebiu/vagrant/Vagrantfile",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/FlatDocsRepository.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/DocsServiceProvider.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/bs-callouts.less",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/node_modules/laravel-elixir/Config.js",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/docs.less",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/.editorconfig",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Console/Kernel.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/public/docs/install.sh",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/tests/ExampleTest.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/routes.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/errors/404.blade.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/DocsRepositoryContract.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/config/app.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/composer.json",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/User.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Middleware/Authenticate.php",
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/src/GitList/Controller/MainController.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/index.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/vendor/symfony/process/Process.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/vendor/klaussilveira/gitter/lib/Gitter/Client.php",
@@ -753,37 +828,24 @@
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/composer.json",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Controllers/Git/AuthController.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Middleware/RedirectIfAuthenticated.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/routes.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/git/login.blade.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Controllers/Git/MainController.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/sqlwars/app/Http/Routes/AdminRoutes.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/src/GitList/Controller/AuthController.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/database/migrations/2014_10_12_000000_create_users_table.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/sqlwars/database/migrations/2015_04_07_123727_create_users_table.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/User.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/git.less",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/gulpfile.js",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/js/git.js",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/docs.less",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/DocsServiceProvider.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/docs/master.blade.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/less/prettyprint.less",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/bower.json",
 		"/C/Users/Cretu Eusebiu/Desktop/colour-schemes-master/prettyprint/peacocks-in-space.html",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/assets/js/docs.js",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/sqlwars/gulpfile.js",
 		"/C/Users/Cretu Eusebiu/Desktop/colour-schemes-master/prettyprint/light/snappy-light.html",
 		"/C/Users/Cretu Eusebiu/Desktop/colour-schemes-master/prettyprint/boxuk.html",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/storage/app/docs/filepicker/master/quick.md",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/public/docs.js",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/docs/show.blade.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/welcome.blade.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/config/docs.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/resources/views/docs/navbar.blade.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Http/Controllers/DocsController.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/docs.hazzardweb.com/app/config/codex.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/docs.hazzardweb.com/app/views/codex/show.blade.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/config/app.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/docs.hazzardweb.com/app/controllers/CodexController.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/docs.hazzardweb.com/public/assets/js/prettify/run_prettify.js",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/docs.hazzardweb.com/public/assets/js/codex.js",
@@ -801,10 +863,6 @@
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb0/config/app.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb0/app/Http/Controllers/DocsController.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb0/app/Providers/AppServiceProvider.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/GitDocsRepository.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/FlatDocsRepository.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/DocsRepositoryContract.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Docs/DocsRepository.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb0/resources/views/welcome.blade.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb0/app/Http/routes.php",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/hazzardweb/app/Post.php",
@@ -854,29 +912,11 @@
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/files/ssdsd",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/build.sh",
 		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/protection.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/javascript.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/uploader/src/Http/Event.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/composer.json",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/assets/css/file-icons.css",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/installation.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/README.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/README.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/quick.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/basiclist.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/basic-list.html",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/basic.html",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/singlefile.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/crop.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/TODO.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/uploader.md",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/UploadedFile.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/File.php",
-		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/extending.md"
+		"/C/Users/Cretu Eusebiu/Dropbox/Code/filepicker/docs/protection.md"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -890,6 +930,28 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"code>",
+			"code",
+			"list-style",
+			"bs-",
+			"primary",
+			"text-dec",
+			"26A9FF",
+			"toc",
+			"p",
+			"app",
+			"getStoragePath",
+			"getUpdatedTimestamp",
+			"DateTime",
+			"markdown",
+			"getVersions",
+			"->storagePath",
+			"storagePath",
+			"storage_path",
+			"toc",
+			"<p>",
+			"sidebar",
+			"3c4350",
 			"var_dump",
 			"proc_open",
 			"process_open",
@@ -995,29 +1057,7 @@
 			"intervention",
 			"minSelect",
 			"radius",
-			"cret",
-			"radius",
-			".header-anchor",
-			"afix",
-			"61",
-			"sidebar",
-			"sodebar",
-			"18bc9c",
-			"### ",
-			"readfile_chunk_size",
-			"min_file_size",
-			"max_file_size",
-			"max_number_of_files",
-			"max_height",
-			"inlineFileType",
-			"inline_file_types",
-			"imageFileType",
-			"image_file_types",
-			"min_height",
-			"script_url",
-			"upload_url",
-			"script_url",
-			"console.log("
+			"cret"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1025,6 +1065,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"",
 			".prettyprint",
 			"####  ",
 			"Filepicker",
@@ -1077,41 +1118,40 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/Http/Middleware/Authenticate.php",
+					"file": "resources/assets/less/docs.less",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 896,
+						"buffer_size": 3771,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								822,
-								822
+								1028,
+								1028
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
-							"bs_sintax": "php",
-							"buffer_scroll_name": "d9b1b778",
+							"bs_sintax": "less",
+							"buffer_scroll_name": "9c641617",
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
 							"spell_check": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/LESS/LESS.tmLanguage",
 							"tab_size": 4,
-							"translate_tabs_to_spaces": false,
+							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 374.0,
+						"translation.y": 739.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1119,71 +1159,223 @@
 				},
 				{
 					"buffer": 1,
-					"file": "app/Http/routes.php",
+					"file": "config/docs.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 914,
+						"buffer_size": 1689,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								538,
-								538
+								252,
+								252
+							]
+						],
+						"settings":
+						{
+							"bs_sintax": "php",
+							"buffer_scroll_name": "c8434692",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"spell_check": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/views/docs/navbar.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2383,
+								2383
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
-							"bs_sintax": "php",
-							"buffer_scroll_name": "2c8e34d4",
+							"bs_sintax": "laravel-blade",
+							"buffer_scroll_name": "e190fef7",
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
 							"spell_check": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false,
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 74.0,
+						"translation.y": 627.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/C/Users/Cretu Eusebiu/Dropbox/Code/gitlist/src/GitList/Controller/MainController.php",
+					"buffer": 3,
+					"file": "resources/assets/js/docs.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5166,
+						"buffer_size": 2940,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1880,
-								1880
+								1955,
+								1955
 							]
 						],
 						"settings":
 						{
-							"bs_sintax": "php",
-							"buffer_scroll_name": "63c8ff9b",
+							"auto_complete": false,
+							"bs_sintax": "javascript",
+							"buffer_scroll_name": "a80d7c82",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
 							"spell_check": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 103.0,
+						"translation.y": 513.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "resources/views/docs/show.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 462,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								365,
+								365
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bs_sintax": "laravel-blade",
+							"buffer_scroll_name": "12458311",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"spell_check": false,
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/docs/flat/filepicker/1.0/installation.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1765,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								266,
+								266
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bs_sintax": "markdown",
+							"buffer_scroll_name": "cbe9ef10",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/docs/flat/filepicker/1.0/toc.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 751,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								297,
+								297
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bs_sintax": "markdown",
+							"buffer_scroll_name": "cee84cff",
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"parser": null,
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 4,
+							"target": "disk",
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1220,6 +1412,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.composer":
+	{
+		"height": 176.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -1228,7 +1424,7 @@
 	"project": "hazzardweb.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 70.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1237,6 +1433,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"docs.php",
+				"config\\docs.php"
+			],
+			[
+				"docs.js",
+				"resources\\assets\\js\\docs.js"
+			],
 			[
 				"authcontroller",
 				"app\\Http\\Controllers\\Git\\AuthController.php"
@@ -1266,16 +1470,8 @@
 				"storage\\app\\docs\\filepicker\\master\\quick.md"
 			],
 			[
-				"docs.js",
-				"resources\\assets\\js\\docs.js"
-			],
-			[
 				"docscont",
 				"app\\Http\\Controllers\\DocsController.php"
-			],
-			[
-				"docs.php",
-				"config\\docs.php"
 			],
 			[
 				"app.",
@@ -1778,7 +1974,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 207.0,
+	"side_bar_width": 251.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

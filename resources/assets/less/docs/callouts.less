@@ -1,0 +1,44 @@
+.callout {
+    padding: 10px 14px;
+    margin: 20px 0;
+    border-left-width: 4px;
+    font-size: 14px;
+
+    h4 {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    &+.callout {
+        margin-top: -5px;
+    }
+}
+
+.callout-variant(@color; @bg-color) {
+    border-left-color: @color;
+    background-color: @bg-color;
+
+    h4 {
+        color: @color;
+    }
+}
+
+.callout-success {
+    .callout-variant(#5cb85c; #f3f8f3);
+}
+
+.callout-danger {
+    .callout-variant(#d9534f; #fdf7f7);
+}
+
+.callout-warning {
+    .callout-variant(#f0ad4e; #fcf8f2);
+}
+
+.callout-info {
+    .callout-variant(#5bc0de; #f4f8fa);
+}

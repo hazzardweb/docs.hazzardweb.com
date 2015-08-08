@@ -1,84 +1,79 @@
 $(document).ready(function() {
-    $('pre').addClass('prettyprint');
+    var toc  = $('.docs-toc'),
+        docs = $('.docs-content');
 
-    $('.nav-toc>ul').addClass('nav navbar-nav');
+    // Clone toc.
+    var nav = $(toc.html());
+    $('.docs-nav-toc').replaceWith(nav);
+    nav.addClass('nav navbar-nav docs-nav-toc');
 
-    $('.nav-toc>ul>li').each(function(index, el) {
-        var el = $(el);
+    nav.find('>li').each(function() {
+        var li = $(this), p = li.find('p');
 
-        if (el.children()[0].tagName === 'P') {
-            el.addClass('dropdown');
-            var p = el.children('p');
-            p.replaceWith('<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-link"></span> '+p.html()+' <span class="caret"></span></a>');
-            el.children('ul').addClass('dropdown-menu');
+        if (p.length) {
+            li.addClass('dropdown');
+            li.find('ul').addClass('dropdown-menu');
+            p.replaceWith('<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+p.html()+' <span class="caret"></span></a>');
         } else {
-            var a = el.children('a');
-            a.html('<span class="glyphicon glyphicon-link"></span> '+a.html());
+            li.find('ul>li').each(function() {
+                li.after($(this));
+            });
+            li.remove();
         }
     });
 
-    // Bootstrap the tables
-    $(".documentation table").addClass("table table-striped table-bordered table-hover table-condensed");
+    // Bootstrap the tables.
+    docs.find('table').addClass('table table-striped table-bordered table-hover table-condensed');
 
-    // Bootstrap the images
-    $(".documentation img").addClass("img-responsive img-thumbnail");
+    // Bootstrap the images.
+    docs.find('img').addClass('img-responsive img-thumbnail');
 
-    // Prettify the <pre> tags
-    $(".documentation [class^='language-']").closest("pre").addClass("prettyprint theme-freshcut");
-
-    // Dynamic callouts
-    $(".documentation blockquote:contains(Attention)").addClass("bs-callout bs-callout-danger");
-    $(".documentation blockquote:contains(Danger)").addClass("bs-callout bs-callout-danger");
-
-    $(".documentation blockquote:contains(Warning)").addClass("bs-callout bs-callout-warning");
-    $(".documentation blockquote:contains(Notice)").addClass("bs-callout bs-callout-warning");
-
-    $(".documentation blockquote:contains(Info)").addClass("bs-callout bs-callout-info");
-    $(".documentation blockquote:contains(Note)").addClass("bs-callout bs-callout-info");
-
-    $(".documentation blockquote:contains(Hint)").addClass("bs-callout bs-callout-success");
-    $(".documentation blockquote:contains(Tip)").addClass("bs-callout bs-callout-success");
-
-    // Change h1 to h4 for search results
-    $("#search-results h1").replaceWith(function() {
-        return "<h4>" + $(this).text() + "</h4>";
+    // Bootstrap the iframes.
+    docs.find('iframe').each(function() {
+        $(this).wrap('<div class="embed-responsive embed-responsive-16by9"></div>')
+                .addClass('embed-responsive-item');
     });
 
-    var fixOffset = function() {
-        var hash = window.location.hash;
-        if (hash.length && $(hash).length) {
-            $('html, body').animate({
-                scrollTop: $(hash).offset().top - 80
-            }, 0);
-        }
-    }
+    // Dynamic callouts.
+    docs.find('blockquote:contains(Attention)').addClass('callout callout-danger');
+    docs.find('blockquote:contains(Danger)').addClass('callout callout-danger');
 
-    setTimeout(fixOffset, 200);
-    window.onhashchange = fixOffset;
+    docs.find('blockquote:contains(Warning)').addClass('callout callout-warning');
+    docs.find('blockquote:contains(Notice)').addClass('callout callout-warning');
 
-    // Create anchor tags on header spans within documentation
-    // This can be done better/smarter
-    $(".documentation h2, .documentation h3, .documentation h4, .documentation h5, .documentation h6").each(function() {
+    docs.find('blockquote:contains(Info)').addClass('callout callout-info');
+    docs.find('blockquote:contains(Note)').addClass('callout callout-info');
 
+    docs.find('blockquote:contains(Hint)').addClass('callout callout-success');
+    docs.find('blockquote:contains(Tip)').addClass('callout callout-success');
+
+    // Set active page.
+    toc.find('a[href$="/'+toc.data('current-page')+'"]').parent().addClass('active');
+
+    // Change h1 to h4 for search results.
+    $('#search-results h1').replaceWith(function() {
+        return '<h4>' + $(this).text() + '</h4>';
+    });
+
+    // Create anchor tags on header spans within documentation.
+    docs.find('h2, h3, h4, h5, h6').each(function() {
         // We want to ignore header spans within blockquotes
-        if ($(this).parent().get(0).tagName != "BLOCKQUOTE") {
-            var anchor = $(this).text().toLowerCase().trim();
-
-            var hyphenNeedle = [/ /g];
-            var emptyNeedle = [/\[/g, /\]/g, /\(/g, /\)/g, /\:/g];
+        if ($(this).parent().get(0).tagName !== 'BLOCKQUOTE') {
+            var anchor = $(this).text().toLowerCase().trim(),
+                hyphenNeedle = [/ /g],
+                emptyNeedle = [/\[/g, /\]/g, /\(/g, /\)/g, /\:/g];
 
             hyphenNeedle.forEach(function(word) {
                 anchor = anchor.replace(word, "-");
             });
 
             emptyNeedle.forEach(function(word) {
-                anchor = anchor.replace(word, "");
+                anchor = anchor.replace(word, '');
             });
 
             anchor = anchor.replace('.', '');
 
             $(this).append(" <a class=\"header-anchor\" id=\"" + anchor + "\" href=\"#" + anchor + "\"></a>");
         }
-
     });
 });

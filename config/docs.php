@@ -20,7 +20,7 @@ return [
 	|
 	*/
 
-	'storage_path' => public_path('docs'),
+	'storage_path' => base_path('resources/docs/flat'),
 
 	/*
 	|--------------------------------------------------------------------------

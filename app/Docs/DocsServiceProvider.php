@@ -32,11 +32,16 @@ class DocsServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->singleton('Hazzard\Web\Docs\DocsRepositoryContract', function() {
+		$this->app->singleton(DocsRepositoryContract::class, function () {
 			return $this->createDriver();
 		});
 	}
 
+    /**
+     * Create a driver.
+     *
+     * @return \Hazzard\Web\Docs\DocsRepository
+     */
 	protected function createDriver()
 	{
 		$config = $this->app['config']['docs'];
