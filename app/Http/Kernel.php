@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Http;
+namespace Hazzard\Web\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \HazzardWeb\Http\Middleware\EncryptCookies::class,
+        \Hazzard\Web\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \HazzardWeb\Http\Middleware\VerifyCsrfToken::class,
+        \Hazzard\Web\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -26,8 +26,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \HazzardWeb\Http\Middleware\Authenticate::class,
+        'auth' => \Hazzard\Web\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \HazzardWeb\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Hazzard\Web\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }

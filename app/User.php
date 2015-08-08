@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb;
+namespace Hazzard\Web;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

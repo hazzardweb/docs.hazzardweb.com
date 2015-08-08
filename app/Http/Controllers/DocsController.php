@@ -1,20 +1,20 @@
 <?php
 
-namespace HazzardWeb\Http\Controllers;
+namespace Hazzard\Web\Http\Controllers;
 
 use Illuminate\Http\Request;
-use HazzardWeb\Docs\DocsRepositoryContract;
-use HazzardWeb\Http\Controllers\Controller;
+use Hazzard\Web\Docs\DocsRepositoryContract;
+use Hazzard\Web\Http\Controllers\Controller;
 
 class DocsController extends Controller
 {
 	/**
-	 * @var \HazzardWeb\Docs\DocsRepositoryContract
+	 * @var \Hazzard\Web\Docs\DocsRepositoryContract
 	 */
 	protected $docs;
 
 	/**
-	 * @param \HazzardWeb\Docs\DocsRepositoryContract $docs
+	 * @param \Hazzard\Web\Docs\DocsRepositoryContract $docs
 	 */
 	public function __construct(DocsRepositoryContract $docs)
 	{

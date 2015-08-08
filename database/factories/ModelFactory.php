@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(HazzardWeb\User::class, function ($faker) {
+$factory->define(Hazzard\Web\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,

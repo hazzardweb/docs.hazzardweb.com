@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Docs;
+namespace Hazzard\Web\Docs;
 
 use Parsedown;
 use PHPGit\Git;
@@ -32,7 +32,7 @@ class DocsServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->singleton('HazzardWeb\Docs\DocsRepositoryContract', function() {
+		$this->app->singleton('Hazzard\Web\Docs\DocsRepositoryContract', function() {
 			return $this->createDriver();
 		});
 	}

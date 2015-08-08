@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Providers;
+namespace Hazzard\Web\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'HazzardWeb\Http\Controllers';
+    protected $namespace = 'Hazzard\Web\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

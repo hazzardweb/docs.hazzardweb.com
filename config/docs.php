@@ -20,7 +20,7 @@ return [
 	|
 	*/
 
-	'storage_path' => storage_path('app/docs'),
+	'storage_path' => public_path('docs'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -30,8 +30,9 @@ return [
 	*/
 
 	'manual_names' => [
-		'filepicker' => 'Filepicker',
-		'elp' => 'EasyLogin Pro'
+		'filepicker' 		  => 'Filepicker',
+		'easylogin-pro' 	  => 'EasyLogin Pro',
+		'ajax-comment-system' => 'Ajax Comment System',
 	],
 
 	/*

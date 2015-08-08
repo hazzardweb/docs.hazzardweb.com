@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Jobs;
+namespace Hazzard\Web\Jobs;
 
 use Illuminate\Bus\Queueable;
 

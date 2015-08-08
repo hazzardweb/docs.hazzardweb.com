@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://hazzardweb.app',
+    'url' => env('APP_URL', 'http://hazzardweb.app'),
 
     /*
     |--------------------------------------------------------------------------
@@ -140,10 +140,10 @@ return [
         /*
          * Application Service Providers...
          */
-        HazzardWeb\Providers\AppServiceProvider::class,
-        HazzardWeb\Providers\EventServiceProvider::class,
-        HazzardWeb\Providers\RouteServiceProvider::class,
-        HazzardWeb\Docs\DocsServiceProvider::class,
+        Hazzard\Web\Providers\AppServiceProvider::class,
+        Hazzard\Web\Providers\EventServiceProvider::class,
+        Hazzard\Web\Providers\RouteServiceProvider::class,
+        Hazzard\Web\Docs\DocsServiceProvider::class,
     ],
 
     /*

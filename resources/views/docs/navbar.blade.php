@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 			</button>
 
-			<a href="/" class="navbar-brand">Documentation</a>
+			{{-- <a href="/" class="navbar-brand">Documentation</a> --}}
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">
@@ -73,6 +73,7 @@
 			</div>
 
 			<ul class="nav navbar-nav navbar-right">
+                <li><a href="mailto:hazzardweb@gmail.com">Support</a></li>
 				<li><a href="{{ config('app.url') }}">HazzardWeb</a></li>
 			</ul>
 		</div>

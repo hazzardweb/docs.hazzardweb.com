@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Http\Middleware;
+namespace Hazzard\Web\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

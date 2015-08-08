@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Providers;
+namespace Hazzard\Web\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

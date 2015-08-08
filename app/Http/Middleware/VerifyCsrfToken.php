@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Http\Middleware;
+namespace Hazzard\Web\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

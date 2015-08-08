@@ -1,11 +1,11 @@
 <?php
 
-namespace HazzardWeb\Http\Controllers\Git;
+namespace Hazzard\Web\Http\Controllers\Git;
 
 use Illuminate\Http\Request;
 
-use HazzardWeb\Http\Requests;
-use HazzardWeb\Http\Controllers\Controller;
+use Hazzard\Web\Http\Requests;
+use Hazzard\Web\Http\Controllers\Controller;
 
 class MainController extends Controller
 {

@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    HazzardWeb\Http\Kernel::class
+    Hazzard\Web\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    HazzardWeb\Console\Kernel::class
+    Hazzard\Web\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    HazzardWeb\Exceptions\Handler::class
+    Hazzard\Web\Exceptions\Handler::class
 );
 
 /*

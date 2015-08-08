@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Docs;
+namespace Hazzard\Web\Docs;
 
 interface DocsRepositoryContract
 {

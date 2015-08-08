@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => HazzardWeb\User::class,
+        'model'  => Hazzard\Web\User::class,
         'key' => '',
         'secret' => '',
     ],

@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Docs;
+namespace Hazzard\Web\Docs;
 
 use DateTime;
 use PHPGit\Git;
@@ -79,13 +79,13 @@ class GitDocsRepository extends DocsRepository
 	{
 		$manualDir = $this->storagePath.'/'.$manual;
 
-		return $this->cache->remember("cache.$manual.branches", 10, function() use ($manualDir) {
+		return $this->cache->remember("cache.$manual.branches", 10, function () use ($manualDir) {
 			$this->git->setRepository($manualDir);
 			$this->git->fetch('origin');
 
-			return array_filter(array_map(function($branch) {
+			return array_filter(array_map(function ($branch) {
 				return preg_replace('/[\w]+?\//', '', $branch['name']);
-			}, $this->git->branch(['remotes' => true])), function($branch) {
+			}, $this->git->branch(['remotes' => true])), function ($branch) {
 				return $branch !== 'HEAD';
 			});
 		});
@@ -162,7 +162,7 @@ class GitDocsRepository extends DocsRepository
 			$this->git->setRepository($storagePath);
 			$this->git->checkout($version);
 		} else {
-			$this->cache->remember("$manual.$version.checkout", 10, function() use ($version, $storagePath) {
+			$this->cache->remember("$manual.$version.checkout", 10, function () use ($version, $storagePath) {
 				$this->git->setRepository($storagePath);
 				$this->git->pull('origin', $version);
 

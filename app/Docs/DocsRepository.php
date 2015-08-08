@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Docs;
+namespace Hazzard\Web\Docs;
 
 use DateTime;
 use Parsedown;
@@ -198,7 +198,7 @@ abstract class DocsRepository implements DocsRepositoryContract
 			return $value;
 		}
 
-		return $this->cache->remember($key, $minutes, function() use ($value) {
+		return $this->cache->remember($key, $minutes, function () use ($value) {
 			return $value;
 		});
 	}

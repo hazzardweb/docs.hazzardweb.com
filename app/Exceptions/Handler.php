@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Exceptions;
+namespace Hazzard\Web\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

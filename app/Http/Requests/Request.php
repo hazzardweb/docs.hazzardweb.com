@@ -1,6 +1,6 @@
 <?php
 
-namespace HazzardWeb\Http\Requests;
+namespace Hazzard\Web\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => HazzardWeb\User::class,
+    'model' => Hazzard\Web\User::class,
 
     /*
     |--------------------------------------------------------------------------
