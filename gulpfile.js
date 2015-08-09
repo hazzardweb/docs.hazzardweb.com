@@ -10,9 +10,6 @@ var bower = function (path) {
 
 elixir(function(mix) {
 	mix
-        .copy(bower('highlightjs/highlight.pack.min.js'), 'public/js/vendor/highlight.js')
-        .copy(bower('highlightjs/styles/obsidian.css'), 'public/css/vendor/highlightjs/obsidian.css')
-
         .less('docs.less', 'public/css/docs.css')
 		.less('git.less', 'public/css/git.css')
 
