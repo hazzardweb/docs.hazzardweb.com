@@ -5,11 +5,11 @@ namespace Hazzard\Web\Docs;
 interface RepositoryInterface
 {
 	/**
-	 * Get manual's table of contents file, if it exists.
+	 * Get manual's table of contents file.
 	 *
 	 * @param  string $manual
 	 * @param  string $version
-	 * @return string
+	 * @return string|null
 	 */
 	public function getToc($manual, $version);
 
@@ -19,17 +19,17 @@ interface RepositoryInterface
 	 * @param  string $manual
 	 * @param  string $version
 	 * @param  string $page
-	 * @return string
+	 * @return string|null
 	 */
 	public function get($manual, $version, $page);
 
 	/**
-	 * Gets the given documentation page modification time.
+	 * Get the given documentation page modification time.
 	 *
 	 * @param  string $manual
 	 * @param  string $version
 	 * @param  string $page
-	 * @return mixed
+	 * @return string|null
 	 */
 	public function getUpdatedTimestamp($manual, $version, $page);
 
@@ -49,17 +49,10 @@ interface RepositoryInterface
 	public function getVersions($manual);
 
 	/**
-	 * Get the default manual.
-	 *
-	 * @return mixed
-	 */
-	public function getDefaultManual();
-
-	/**
 	 * Get the default version for the given manual.
 	 *
 	 * @param  string $manual
-	 * @return string
+	 * @return string|null
 	 */
 	public function getDefaultVersion($manual);
 

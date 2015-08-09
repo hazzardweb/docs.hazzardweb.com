@@ -7,10 +7,10 @@ use Markdown;
 class FlatRepository extends Repository
 {
 	/**
-	 * Get manual's table of contents file, if it exists.
+	 * Get manual's table of contents file.
 	 *
 	 * @param  string $version
-	 * @return string
+	 * @return string|null
 	 */
 	public function getToc($manual, $version)
 	{
@@ -21,8 +21,6 @@ class FlatRepository extends Repository
 				$this->parse($this->files->get($tocFile), $manual.'/'.$version)
 			);
 		}
-
-		return null;
 	}
 
 	/**
@@ -31,19 +29,17 @@ class FlatRepository extends Repository
 	 * @param  string $manual
 	 * @param  string $version
 	 * @param  string $page
-	 * @return string
+	 * @return string|null
 	 */
 	public function get($manual, $version, $page)
 	{
 		$pageFile = $this->storagePath.'/'.$manual.'/'.$version.'/'.$page.'.md';
 
 		if ($this->files->exists($pageFile)) {
-			return $this->cached("$manual.$version.$pageFile",
+			return $this->cached("$manual.$version.$page",
 				$this->parse($this->files->get($pageFile), $manual.'/'.$version.'/'.dirname($page))
 			);
 		}
-
-		abort(404);
 	}
 
 	/**
@@ -66,8 +62,8 @@ class FlatRepository extends Repository
 
 				if (strpos(strtolower($haystack), strtolower($needle)) !== false) {
 					$results[] = [
-						'title' => $this->getPageTitle((string)$file),
-						'url' => str_replace([$this->storagePath, '.md'], '', (string) $file),
+						'title' => $this->getPageTitle((string) $file),
+						'url'   => str_replace([$this->storagePath, '.md'], '', (string) $file),
 					];
 				}
 			}

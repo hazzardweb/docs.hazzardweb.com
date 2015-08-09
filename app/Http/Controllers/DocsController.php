@@ -2,7 +2,7 @@
 
 namespace Hazzard\Web\Http\Controllers;
 
-use Hazzard\Web\Docs\RepositoryInterface as Docs;
+use Hazzard\Web\Docs\RepositoryInterface;
 
 class DocsController extends Controller
 {
@@ -16,7 +16,7 @@ class DocsController extends Controller
      *
 	 * @param \Hazzard\Web\Docs\RepositoryInterface $docs
 	 */
-	public function __construct(Docs $docs)
+	public function __construct(RepositoryInterface $docs)
 	{
 		$this->docs = $docs;
 	}

@@ -42,8 +42,6 @@ class GitRepository extends Repository
 				$this->parse($this->files->get($tocFile), $manual.'/'.$version)
 			);
 		}
-
-		return null;
 	}
 
 	/**
@@ -65,9 +63,30 @@ class GitRepository extends Repository
 				$this->parse($this->files->get($pageFile), $manual.'/'.$version.'/'.dirname($page))
 			);
 		}
-
-		abort(404);
 	}
+
+    /**
+     * Gets the given documentation page modification time.
+     *
+     * @param  string $manual
+     * @param  string $version
+     * @param  string $page
+     * @return mixed
+     */
+    public function getUpdatedTimestamp($manual, $version, $page)
+    {
+        $storagePath = $this->getStoragePath($manual, $version);
+
+        $page = $storagePath.'/'.$page.'.md';
+
+        if ($this->files->exists($page)) {
+            $timestamp = DateTime::createFromFormat('U', filemtime($page));
+
+            return $timestamp->format('l, F d, Y');
+        }
+
+        return false;
+    }
 
 	/**
 	 * Get all versions for the given manual.
@@ -123,29 +142,6 @@ class GitRepository extends Repository
 	}
 
 	/**
-	 * Gets the given documentation page modification time.
-	 *
-	 * @param  string $manual
-	 * @param  string $version
-	 * @param  string $page
-	 * @return mixed
-	 */
-	public function getUpdatedTimestamp($manual, $version, $page)
-	{
-		$storagePath = $this->getStoragePath($manual, $version);
-
-		$page = $storagePath.'/'.$page.'.md';
-
-		if ($this->files->exists($page)) {
-			$timestamp = DateTime::createFromFormat('U', filemtime($page));
-
-			return $timestamp->format($this->config['modified_timestamp']);
-		}
-
-		return false;
-	}
-
-	/**
 	 * Return the path to the checked out repository for the supplied
 	 * manual and version.
 	 *
@@ -153,7 +149,7 @@ class GitRepository extends Repository
 	 * @param  string $version
 	 * @return string
 	 */
-	private function getStoragePath($manual, $version)
+	protected function getStoragePath($manual, $version)
 	{
 		$storagePath = storage_path('docs/'.$manual.'/'.$version);
 

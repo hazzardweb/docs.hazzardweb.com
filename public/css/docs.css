@@ -211,6 +211,9 @@ pre {
 .docs-navbar .navbar-nav > li > .dropdown-menu {
   border-radius: 2px;
 }
+.docs-navbar .navbar-nav > li > .dropdown-menu a {
+  text-transform: capitalize;
+}
 .docs-navbar .navbar-nav > .open > a,
 .docs-navbar .navbar-nav > .open > a:focus,
 .docs-navbar .navbar-nav > .open > a:hover {

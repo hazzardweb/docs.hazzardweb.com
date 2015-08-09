@@ -50,73 +50,74 @@ abstract class Repository implements RepositoryInterface
 		$this->storagePath = $config['storage_path'];
 	}
 
-	/**
-	 * Get the default manual.
-	 *
-	 * @return mixed
-	 */
-	public function getDefaultManual()
-	{
-		$manuals = $this->getManuals();
+    /**
+     * Gets the given documentation page modification time.
+     *
+     * @param  string $manual
+     * @param  string $version
+     * @param  string $page
+     * @return string|null
+     */
+    public function getUpdatedTimestamp($manual, $version, $page)
+    {
+        $page = $this->storagePath.'/'.$manual.'/'.$version.'/'.$page.'.md';
 
-		if (count($manuals) > 1) {
-			if (! is_null($this->config['default_manual'])) {
-				return $this->config['default_manual'];
-			} else {
-				return strval($manuals[0]);
-			}
-		} elseif (count($manuals) === 1) {
-			return strval($manuals[0]);
-		}
+        if ($this->files->exists($page)) {
+            $timestamp = DateTime::createFromFormat('U', filemtime($page));
 
-		return null;
-	}
+            return $timestamp->format('l, F d, Y');
+        }
+    }
+
+    /**
+     * Get all manuals from documentation directory.
+     *
+     * @return array
+     */
+    public function getManuals()
+    {
+        return $this->getDirectories($this->storagePath);
+    }
+
+
+    /**
+     * Get all versions for the given manual.
+     *
+     * @param  string $manual
+     * @return array
+     */
+    public function getVersions($manual)
+    {
+        $manualDir = $this->storagePath.'/'.$manual;
+
+        $versions = $this->getDirectories($manualDir);
+
+        return array_reverse($versions);
+    }
 
 	/**
 	 * Get the default version for the given manual.
 	 *
 	 * @param  string $manual
-	 * @return string
+	 * @return string|null
 	 */
 	public function getDefaultVersion($manual)
 	{
 		$versions = $this->getVersions($manual);
 
-		switch ($this->config['version_ordering']) {
-			case 'numerical':
-				sort($versions, SORT_NATURAL);
-				break;
+        if (count($versions) === 1) {
+            return $versions[0];
+        }
 
-			case 'alphabetically':
-				sort($versions, SORT_NUMERIC);
-				break;
-		}
+        if (count($versions) > 1) {
+            if ($versions[0] === 'master') {
+                return $versions[1];
+            }
 
-		return $versions[0];
+            return $versions[0];
+        }
 	}
 
-	/**
-	 * Get all manuals from documentation directory.
-	 *
-	 * @return array
-	 */
-	public function getManuals()
-	{
-		return $this->getDirectories($this->storagePath);
-	}
-
-	/**
-	 * Get all versions for the given manual.
-	 *
-	 * @param  string $manual
-	 * @return array
-	 */
-	public function getVersions($manual)
-	{
-		$manualDir = $this->storagePath.'/'.$manual;
-
-		return $this->getDirectories($manualDir);
-	}
 
 	/**
 	 * Return an array of folders within the supplied path.
@@ -124,18 +125,14 @@ abstract class Repository implements RepositoryInterface
 	 * @param  string $path
 	 * @return array
 	 */
-	public function getDirectories($path)
+	protected function getDirectories($path)
 	{
 		if (! $this->files->exists($path)) {
-			abort(404);
+			return [];
 		}
 
 		$folders = [];
 		$directories = $this->files->directories($path);
-
-		if (count($directories) > 0) {
-
-		}
 
 		foreach ($directories as $dir) {
 			$dir       = str_replace('\\', '/', $dir);
@@ -161,27 +158,6 @@ abstract class Repository implements RepositoryInterface
 		fclose($file);
 
 		return $title;
-	}
-
-	/**
-	 * Gets the given documentation page modification time.
-	 *
-	 * @param  string $manual
-	 * @param  string $version
-	 * @param  string $page
-	 * @return mixed
-	 */
-	public function getUpdatedTimestamp($manual, $version, $page)
-	{
-		$page = $this->storagePath.'/'.$manual.'/'.$version.'/'.$page.'.md';
-
-		if ($this->files->exists($page)) {
-			$timestamp = DateTime::createFromFormat('U', filemtime($page));
-
-			return $timestamp->format($this->config['modified_timestamp']);
-		}
-
-		return false;
 	}
 
 	/**
@@ -214,10 +190,10 @@ abstract class Repository implements RepositoryInterface
 		$basePath = url('/' . ltrim($pathPrefix, '/'));
 		$rendered = $this->parsedown->text($text);
 
-		// Replace absolute relative paths (paths that start with / but not //)
+		// Replace absolute relative paths (paths that start with / but not //).
 		$rendered = preg_replace('/href=\"(\/[^\/].+?).md(#?.*?)\"/', "href=\"$basePath$1$2\"", $rendered);
 
-		// Replace relative paths (paths that don't start with / or http://, https://, //, etc)
+		// Replace relative paths (paths that don't start with / or http://, https://, //, etc).
 		$rendered = preg_replace('/href=\"(?!.*?\/\/)(.+?).md(#?.*?)\"/', "href=\"$basePath/$1$2\"", $rendered);
 
 		return $rendered;
