@@ -105,6 +105,8 @@ abstract class Repository implements RepositoryInterface
 	{
 		$versions = $this->getVersions($manual);
 
+        $versions = array_values($versions);
+
         if (count($versions) === 1) {
             return $versions[0];
         }
