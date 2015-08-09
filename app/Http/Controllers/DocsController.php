@@ -3,20 +3,20 @@
 namespace Hazzard\Web\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Hazzard\Web\Docs\DocsRepositoryContract;
 use Hazzard\Web\Http\Controllers\Controller;
+use Hazzard\Web\Docs\RepositoryInterface as Docs;
 
 class DocsController extends Controller
 {
 	/**
-	 * @var \Hazzard\Web\Docs\DocsRepositoryContract
+	 * @var \Hazzard\Web\Docs\RepositoryInterface
 	 */
 	protected $docs;
 
 	/**
-	 * @param \Hazzard\Web\Docs\DocsRepositoryContract $docs
+	 * @param \Hazzard\Web\Docs\RepositoryInterface $docs
 	 */
-	public function __construct(DocsRepositoryContract $docs)
+	public function __construct(Docs $docs)
 	{
 		$this->docs = $docs;
 	}

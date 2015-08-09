@@ -5,7 +5,7 @@ namespace Hazzard\Web\Docs;
 use DateTime;
 use PHPGit\Git;
 
-class GitDocsRepository extends DocsRepository
+class GitRepository extends Repository
 {
 	/**
 	 * @var \PHPGit\Git

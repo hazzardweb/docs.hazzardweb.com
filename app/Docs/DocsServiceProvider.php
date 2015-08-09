@@ -32,7 +32,7 @@ class DocsServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->singleton(DocsRepositoryContract::class, function () {
+		$this->app->singleton(RepositoryInterface::class, function () {
 			return $this->createDriver();
 		});
 	}
@@ -47,11 +47,11 @@ class DocsServiceProvider extends ServiceProvider
 		$config = $this->app['config']['docs'];
 
 		if ($config['driver'] === 'git') {
-			return (new GitDocsRepository($config, $this->app['files'], $this->app['cache.store'], new Parsedown))
+			return (new GitRepository($config, $this->app['files'], $this->app['cache.store'], new Parsedown))
 					->setGit(new Git);
 		}
 
-		return new FlatDocsRepository($config, $this->app['files'], $this->app['cache.store'], new Parsedown);
+		return new FlatRepository($config, $this->app['files'], $this->app['cache.store'], new Parsedown);
 	}
 
 	/**
@@ -61,6 +61,6 @@ class DocsServiceProvider extends ServiceProvider
 	 */
 	public function provides()
 	{
-		return [DocsRepositoryContract::class];
+		return [RepositoryInterface::class];
 	}
 }

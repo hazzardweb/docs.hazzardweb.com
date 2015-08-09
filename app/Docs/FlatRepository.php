@@ -4,7 +4,7 @@ namespace Hazzard\Web\Docs;
 
 use Markdown;
 
-class FlatDocsRepository extends DocsRepository
+class FlatRepository extends Repository
 {
 	/**
 	 * Get manual's table of contents file, if it exists.

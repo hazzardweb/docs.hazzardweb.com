@@ -5,9 +5,9 @@ namespace Hazzard\Web\Docs;
 use DateTime;
 use Parsedown;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Contracts\Cache\Repository as CacheContract;
+use Illuminate\Contracts\Cache\Repository as Cache;
 
-abstract class DocsRepository implements DocsRepositoryContract
+abstract class Repository implements RepositoryInterface
 {
 	/**
 	 * @var array
@@ -41,7 +41,7 @@ abstract class DocsRepository implements DocsRepositoryContract
 	 * @param \Illuminate\Filesystem\Filesystem $files
 	 * @param \Illuminate\Contracts\Cache\Repository $cache
 	 */
-	public function __construct($config, Filesystem $files, CacheContract $cache, Parsedown $parsedown)
+	public function __construct($config, Filesystem $files, Cache $cache, Parsedown $parsedown)
 	{
 		$this->files = $files;
 		$this->cache = $cache;

@@ -2,7 +2,7 @@
 
 namespace Hazzard\Web\Docs;
 
-interface DocsRepositoryContract
+interface RepositoryInterface
 {
 	/**
 	 * Get manual's table of contents file, if it exists.
