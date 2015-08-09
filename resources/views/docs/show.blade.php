@@ -1,6 +1,8 @@
 @extends('docs.master')
 
 @section('content')
+    @include('docs.navbar')
+
 	<div class="container">
 		<div class="col-md-11 col-md-offset-1">
             <div class="row">

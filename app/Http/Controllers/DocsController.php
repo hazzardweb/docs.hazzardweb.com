@@ -2,8 +2,6 @@
 
 namespace Hazzard\Web\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Hazzard\Web\Http\Controllers\Controller;
 use Hazzard\Web\Docs\RepositoryInterface as Docs;
 
 class DocsController extends Controller
@@ -14,6 +12,8 @@ class DocsController extends Controller
 	protected $docs;
 
 	/**
+     * Create a new controller instance.
+     *
 	 * @param \Hazzard\Web\Docs\RepositoryInterface $docs
 	 */
 	public function __construct(Docs $docs)
@@ -22,17 +22,18 @@ class DocsController extends Controller
 	}
 
 	/**
+     * Show all manuals.
+     *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$defaultManual  = $this->docs->getDefaultManual();
-		$defaultVersion = $this->docs->getDefaultVersion($defaultManual);
-
-		return redirect()->route('docs.show', [$defaultManual, $defaultVersion]);
+        return view('docs.manuals', ['manuals' => $this->docs->getManuals()]);
 	}
 
 	/**
+     * Show a documentation page.
+     *
 	 * @param  string      $manual
 	 * @param  string|null $version
 	 * @param  string|null $page
@@ -42,6 +43,10 @@ class DocsController extends Controller
 	{
         if (is_null($version)) {
 			$version = $this->docs->getDefaultVersion($manual);
+
+            if (is_null($version)) {
+                abort(404);
+            }
 
 			return redirect()->route('docs.show', [$manual, $version]);
 		}
@@ -57,6 +62,10 @@ class DocsController extends Controller
 		$currentVersion = $version;
 		$manuals        = $this->docs->getManuals();
 		$versions       = $this->docs->getVersions($manual);
+
+        if (is_null($content)) {
+            abort(404);
+        }
 
 		return view('docs.show', compact(
 			'toc',
