@@ -10,7 +10,7 @@
 		@if (isset($currentManual))
 			<title>
 				HazzardWeb Docs -
-				{{ config("docs.manual_names.$currentManual", $currentManual) }} {{ $currentVersion }}
+				{{ config("docs.manual_names.$currentManual", $currentManual) }} {{ $currentVersion }} {{ $title }}
 			</title>
 		@else
 			<title>HazzardWeb Docs</title>

@@ -1,19 +1,14 @@
 <?php
 
-namespace Hazzard\Web\Docs;
+namespace Hazzard\Web;
 
 use DateTime;
 use Parsedown;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Cache\Repository as Cache;
 
-abstract class Repository implements RepositoryInterface
+class Documentation
 {
-	/**
-	 * @var array
-	 */
-	protected $config;
-
 	/**
 	 * @var \Illuminate\Filesystem\Filesystem
 	 */
@@ -30,25 +25,53 @@ abstract class Repository implements RepositoryInterface
 	protected $parsedown;
 
 	/**
-	 * @var string
-	 */
-	protected $storagePath;
-
-	/**
 	 * Create a new instance.
 	 *
-	 * @param array $config
 	 * @param \Illuminate\Filesystem\Filesystem $files
 	 * @param \Illuminate\Contracts\Cache\Repository $cache
 	 */
-	public function __construct($config, Filesystem $files, Cache $cache, Parsedown $parsedown)
+	public function __construct(Filesystem $files, Cache $cache, Parsedown $parsedown)
 	{
-		$this->files = $files;
+        $this->files = $files;
 		$this->cache = $cache;
-		$this->config = $config;
 		$this->parsedown = $parsedown;
-		$this->storagePath = $config['storage_path'];
 	}
+
+    /**
+     * Get manual's table of contents file.
+     *
+     * @param  string $version
+     * @return string|null
+     */
+    public function getToc($manual, $version)
+    {
+        $tocFile = $this->getStoragePath($manual, $version, 'toc.md');
+
+        if ($this->files->exists($tocFile)) {
+            return $this->remember("$manual.$version.toc",
+                $this->parse($this->files->get($tocFile), $manual.'/'.$version)
+            );
+        }
+    }
+
+    /**
+     * Get the given documentation page.
+     *
+     * @param  string $manual
+     * @param  string $version
+     * @param  string $page
+     * @return string|null
+     */
+    public function get($manual, $version, $page)
+    {
+        $pageFile = $this->getStoragePath($manual, $version, $page.'.md');
+
+        if ($this->files->exists($pageFile)) {
+            return $this->remember("$manual.$version.$page",
+                $this->parse($this->files->get($pageFile), $manual.'/'.$version.'/'.dirname($page))
+            );
+        }
+    }
 
     /**
      * Gets the given documentation page modification time.
@@ -60,7 +83,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function getUpdatedTimestamp($manual, $version, $page)
     {
-        $page = $this->storagePath.'/'.$manual.'/'.$version.'/'.$page.'.md';
+        $page = $this->getStoragePath($manual, $version, $page.'.md');
 
         if ($this->files->exists($page)) {
             $timestamp = DateTime::createFromFormat('U', filemtime($page));
@@ -76,7 +99,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function getManuals()
     {
-        return $this->getDirectories($this->storagePath);
+        return $this->getDirectories($this->getStoragePath());
     }
 
 
@@ -88,7 +111,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function getVersions($manual)
     {
-        $manualDir = $this->storagePath.'/'.$manual;
+        $manualDir = $this->getStoragePath($manual);
 
         $versions = $this->getDirectories($manualDir);
 
@@ -103,9 +126,7 @@ abstract class Repository implements RepositoryInterface
 	 */
 	public function getDefaultVersion($manual)
 	{
-		$versions = $this->getVersions($manual);
-
-        $versions = array_values($versions);
+		$versions = array_values($this->getVersions($manual));
 
         if (count($versions) === 1) {
             return $versions[0];
@@ -119,7 +140,6 @@ abstract class Repository implements RepositoryInterface
             return $versions[0];
         }
 	}
-
 
 	/**
 	 * Return an array of folders within the supplied path.
@@ -146,42 +166,6 @@ abstract class Repository implements RepositoryInterface
 	}
 
 	/**
-	 * Return the first line of the supplied page. This will (or rather should)
-	 * always be an <h1> tag.
-	 *
-	 * @param  string $page
-	 * @return string
-	 */
-	protected function getPageTitle($page)
-	{
-		$file  = fopen($page, 'r');
-		$title = fgets($file);
-
-		fclose($file);
-
-		return $title;
-	}
-
-	/**
-	 * Returns the cached content if NOT running locally.
-	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 * @param  int    $minutes
-	 * @return mixed
-	 */
-	protected function cached($key, $value, $minutes = 5)
-	{
-		if (app()->environment('local')) {
-			return $value;
-		}
-
-		return $this->cache->remember($key, $minutes, function () use ($value) {
-			return $value;
-		});
-	}
-
-	/**
 	 * Convert text from Markdown to HTML.
 	 *
 	 * @param  string $text
@@ -190,6 +174,7 @@ abstract class Repository implements RepositoryInterface
 	protected function parse($text, $pathPrefix = '')
 	{
 		$basePath = url('/' . ltrim($pathPrefix, '/'));
+
 		$rendered = $this->parsedown->text($text);
 
 		// Replace absolute relative paths (paths that start with / but not //).
@@ -200,4 +185,38 @@ abstract class Repository implements RepositoryInterface
 
 		return $rendered;
 	}
+
+    /**
+     * Get an item from the cache, or store the default value forever.
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function remember($key, $value)
+    {
+        if (app()->environment('local')) {
+            return $value;
+        }
+
+        return $this->cache->rememberForever($key, function () use ($value) {
+            return $value;
+        });
+    }
+
+    /**
+     * Get the storage path.
+     *
+     * @return string
+     */
+    protected function getStoragePath()
+    {
+        $path = storage_path('docs');
+
+        if (func_num_args() === 0) {
+            return $path;
+        }
+
+        return $path.'/'.implode('/', func_get_args());
+    }
 }

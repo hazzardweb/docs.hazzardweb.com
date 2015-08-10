@@ -2,21 +2,22 @@
 
 namespace Hazzard\Web\Http\Controllers;
 
-use Hazzard\Web\Docs\RepositoryInterface;
+use Hazzard\Web\Documentation;
+use Symfony\Component\DomCrawler\Crawler;
 
 class DocsController extends Controller
 {
 	/**
-	 * @var \Hazzard\Web\Docs\RepositoryInterface
+	 * @var \Hazzard\Web\Documentation
 	 */
 	protected $docs;
 
 	/**
      * Create a new controller instance.
      *
-	 * @param \Hazzard\Web\Docs\RepositoryInterface $docs
+	 * @param \Hazzard\Web\Documentation $docs
 	 */
-	public function __construct(RepositoryInterface $docs)
+	public function __construct(Documentation $docs)
 	{
 		$this->docs = $docs;
 	}
@@ -67,8 +68,12 @@ class DocsController extends Controller
             abort(404);
         }
 
+        $title = (new Crawler($content))->filterXPath('//h1');
+        $title = count($title) ? $title->text() : null;
+
 		return view('docs.show', compact(
 			'toc',
+            'title',
 			'content',
 			'lastUpdated',
 			'currentManual',

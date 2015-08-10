@@ -143,7 +143,6 @@ return [
         Hazzard\Web\Providers\AppServiceProvider::class,
         Hazzard\Web\Providers\EventServiceProvider::class,
         Hazzard\Web\Providers\RouteServiceProvider::class,
-        Hazzard\Web\Docs\DocsServiceProvider::class,
     ],
 
     /*
