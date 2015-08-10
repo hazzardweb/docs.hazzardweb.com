@@ -29,6 +29,7 @@ return [
 
 	'manual_names' => [
 		'filepicker' 		  => 'Filepicker',
+        'imagepicker'         => 'Image Picker',
 		'easylogin-pro' 	  => 'EasyLogin Pro',
 		'ajax-comment-system' => 'Ajax Comment System',
 	],
