@@ -60,10 +60,10 @@
 				<div class="title">Hazzard<span>Web</span></div>
 				<div class="links">
 					<a href="http://codecanyon.net/user/HazzardWeb/portfolio">portfolio</a> &#8226;
-					<a href="{{ route('blog.index') }}">blog</a>
+					<!-- <a href="{{ route('blog.index') }}">blog</a> -->
 					<a href="mailto:hazzardweb@gmail.com">contact</a> &#8226;
 					<a href="{{ route('docs.index') }}">docs</a> &#8226;
-					<a href="{{ route('git.index') }}">git</a>
+					<!-- <a href="{{ route('git.index') }}">git</a> -->
 				</div>
 			</div>
 		</div>
