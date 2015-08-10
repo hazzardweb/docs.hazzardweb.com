@@ -115,6 +115,8 @@ class Documentation
 
         $versions = $this->getDirectories($manualDir);
 
+        sort($versions, SORT_NATURAL);
+
         return array_reverse($versions);
     }
 
