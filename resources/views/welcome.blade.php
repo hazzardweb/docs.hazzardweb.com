@@ -63,7 +63,7 @@
 					<!-- <a href="{{ route('blog.index') }}">blog</a> -->
 					<a href="mailto:hazzardweb@gmail.com">contact</a> &#8226;
 					<a href="{{ route('docs.index') }}">docs</a>
-					<!-- &#8226; <a href="{{ route('git.index') }}">git</a> -->
+					&#8226; <a href="http://git.hazzardweb.com">git</a>
 				</div>
 			</div>
 		</div>
