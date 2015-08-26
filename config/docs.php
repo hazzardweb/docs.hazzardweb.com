@@ -21,6 +21,7 @@ return [
         'imagepicker'         => 'Image Picker',
         'imageselect'         => 'Image Select',
 		'easylogin-pro' 	  => 'EasyLogin Pro',
+        'laravel-comments'    => 'Laravel Comments',
 		'ajax-comment-system' => 'Ajax Comment System',
 	],
 
