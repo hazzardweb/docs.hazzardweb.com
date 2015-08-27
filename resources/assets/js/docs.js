@@ -71,7 +71,7 @@ $(document).ready(function() {
                 anchor = anchor.replace(word, '');
             });
 
-            anchor = anchor.replace('.', '');
+            anchor = anchor.replace(/\./g, '');
 
             $(this).append(" <a class=\"header-anchor\" id=\"" + anchor + "\" href=\"#" + anchor + "\"></a>");
         }
