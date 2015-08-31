@@ -17,12 +17,12 @@ return [
 	*/
 
 	'manual_names' => [
-		'filepicker' 		  => 'Filepicker',
-        'imagepicker'         => 'Image Picker',
-        'imageselect'         => 'Image Select',
-		'easylogin-pro' 	  => 'EasyLogin Pro',
-        'laravel-comments'    => 'Laravel Comments',
-		'ajax-comment-system' => 'Ajax Comment System',
+		'filepicker' 		          => 'Filepicker',
+        'imagepicker'                 => 'Image Picker',
+        'imageselect'                 => 'Image Select',
+		'easylogin-pro' 	          => 'EasyLogin Pro',
+		'ajax-comment-system'         => 'Ajax Comment System',
+        'ajax-comment-system-laravel' => 'Ajax Comment System - Laravel',
 	],
 
 ];
