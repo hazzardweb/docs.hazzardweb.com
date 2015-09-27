@@ -15,7 +15,7 @@
                 </div>
                 <div id="docs-navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="mailto:hazzardweb@gmail.com">Email Support</a></li>
+                        <li><a href="http://codecanyon.net/user/hazzardweb#contact">Support</a></li>
                         <li><a href="{{ config('app.url') }}">HazzardWeb</a></li>
                     </ul>
                 </div>

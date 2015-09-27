@@ -46,7 +46,12 @@
                 <div class="docs-nav-toc"></div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="mailto:hazzardweb@gmail.com">Email Support</a></li>
+                    @if ($item = config("docs.urls.$currentManual"))
+                        <li><a href="http://codecanyon.net/item/{{ $item }}/support">Support</a></li>
+                    @else
+                        <li><a href="http://codecanyon.net/user/hazzardweb#contact">Support</a></li>
+                    @endif
+
                     <li><a href="{{ config('app.url') }}">HazzardWeb</a></li>
                 </ul>
             </div>
