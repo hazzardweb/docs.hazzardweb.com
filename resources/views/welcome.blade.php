@@ -61,8 +61,8 @@
 				<div class="links">
 					<a href="http://codecanyon.net/user/HazzardWeb/portfolio">portfolio</a> &#8226;
 					<a href="mailto:hazzardweb@gmail.com">contact</a> &#8226;
-					<a href="{{ route('docs.index') }}">docs</a>
-					&#8226; <a href="http://git.hazzardweb.com">git</a>
+					<a href="http://docs.hazzardweb.com">docs</a>
+					&#8226; <a href="https://git.hazzardweb.com">git</a>
 				</div>
 			</div>
 		</div>
