@@ -1,7 +1,7 @@
-@extends('docs.master')
+@extends('layouts.app')
 
 @section('content')
-    @include('docs.navbar')
+    @include('partials.navbar')
 
 	<div class="container">
 		<div class="col-md-11 col-md-offset-1">
@@ -15,10 +15,6 @@
     			@endif
 
     			<div class="col-md-{{ $toc ? '9' : '12' }} docs-content">
-    				<p class="pull-right">
-    					<small>{{ $lastUpdated }}</small>
-    				</p>
-
     				{!! $content !!}
     			</div>
     		</div>

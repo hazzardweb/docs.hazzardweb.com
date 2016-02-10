@@ -1,9 +1,8 @@
 <?php
 
-namespace Hazzard\Web\Console;
+namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Hazzard\Web\Console\Commands\UpdateDocs;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -14,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        UpdateDocs::class,
+        Commands\UpdateDocs::class,
     ];
 
     /**
@@ -25,6 +24,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
+        //
     }
 }

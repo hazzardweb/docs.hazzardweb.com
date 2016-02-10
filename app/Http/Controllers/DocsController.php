@@ -1,21 +1,22 @@
 <?php
 
-namespace Hazzard\Web\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Hazzard\Web\Documentation;
+use App\Documentation;
+use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\DomCrawler\Crawler;
 
 class DocsController extends Controller
 {
 	/**
-	 * @var \Hazzard\Web\Documentation
+	 * @var \App\Documentation
 	 */
 	protected $docs;
 
 	/**
      * Create a new controller instance.
      *
-	 * @param \Hazzard\Web\Documentation $docs
+	 * @param \App\Documentation $docs
 	 */
 	public function __construct(Documentation $docs)
 	{
@@ -23,46 +24,40 @@ class DocsController extends Controller
 	}
 
 	/**
-     * Show all manuals.
+     * Show all docs.
      *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-        return view('docs.manuals', ['manuals' => $this->docs->getManuals()]);
+        return view('index', ['docs' => $this->docs->all()]);
 	}
 
 	/**
      * Show a documentation page.
      *
-	 * @param  string      $manual
+	 * @param  string      $doc
 	 * @param  string|null $version
 	 * @param  string|null $page
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($manual, $version = null, $page = null)
+	public function show($doc, $version = null, $page = null)
 	{
         if (is_null($version)) {
-			$version = $this->docs->getDefaultVersion($manual);
+			$version = $this->docs->getDefaultVersion($doc);
 
             if (is_null($version)) {
                 abort(404);
             }
 
-			return redirect()->route('docs.show', [$manual, $version]);
+			return redirect()->route('show', [$doc, $version]);
 		}
 
         if (is_null($page)) {
-            $page = 'installation';
+            $page = $this->docs->getDefaultPage($doc, 'installation');
         }
 
-		$toc            = $this->docs->getToc($manual, $version);
-		$content        = $this->docs->get($manual, $version, $page);
-		$lastUpdated    = $this->docs->getUpdatedTimestamp($manual, $version, $page);
-		$currentManual  = $manual;
-		$currentVersion = $version;
-		$manuals        = $this->docs->getManuals();
-		$versions       = $this->docs->getVersions($manual);
+		$content = $this->docs->getContent($doc, $version, $page);
 
         if (is_null($content)) {
             abort(404);
@@ -71,16 +66,15 @@ class DocsController extends Controller
         $title = (new Crawler($content))->filterXPath('//h1');
         $title = count($title) ? $title->text() : null;
 
-		return view('docs.show', compact(
-			'toc',
-            'title',
-			'content',
-			'lastUpdated',
-			'currentManual',
-			'currentVersion',
-			'manuals',
-			'versions',
-            'page'
-		));
+		return view('show', [
+			'toc' => $this->docs->getToc($doc, $version),
+            'title' => $title,
+			'content' => $content,
+			'currentDoc' => $this->docs->all()[$doc],
+			'currentVersion' => $version,
+			'docs' => $this->docs->all(),
+			'versions' => $this->docs->getVersions($doc),
+            'page' => $page,
+		]);
 	}
 }

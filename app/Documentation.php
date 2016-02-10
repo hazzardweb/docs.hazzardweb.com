@@ -1,9 +1,12 @@
 <?php
 
-namespace Hazzard\Web;
+namespace App;
 
+use Closure;
 use DateTime;
 use Parsedown;
+use Illuminate\Support\Arr;
+use Symfony\Component\Yaml\Yaml;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Cache\Repository as Cache;
 
@@ -24,96 +27,117 @@ class Documentation
 	 */
 	protected $parsedown;
 
-	/**
-	 * Create a new instance.
-	 *
-	 * @param \Illuminate\Filesystem\Filesystem $files
-	 * @param \Illuminate\Contracts\Cache\Repository $cache
-	 */
-	public function __construct(Filesystem $files, Cache $cache, Parsedown $parsedown)
+    /**
+     * @var array
+     */
+    protected $docs;
+
+    /**
+     * Create a new docs repository instance.
+     *
+     * @param Filesystem $files
+     * @param Cache      $cache
+     * @param Parsedown  $parsedown
+     */
+    public function __construct(Filesystem $files, Cache $cache, Parsedown $parsedown)
 	{
         $this->files = $files;
-		$this->cache = $cache;
-		$this->parsedown = $parsedown;
+        $this->cache = $cache;
+        $this->parsedown = $parsedown;
 	}
 
     /**
-     * Get manual's table of contents file.
+     * Get all the available documentations from cache or file.
      *
+     * @return array
+     */
+    public function all()
+    {
+        if (! $this->docs) {
+            $this->docs = $this->remember('docs.yml', function () {
+                return $this->getDocs();
+            });
+        }
+
+        return $this->docs;
+    }
+
+    /**
+     * Get all the available documentations from file.
+     *
+     * @return array
+     */
+    public function getDocs()
+    {
+        $file = base_path('docs.yml');
+
+        if ($this->files->exists($file)) {
+            $docs = Yaml::parse($this->files->get($file));
+
+            foreach ($docs as $id => &$doc) {
+                $doc['id'] = $id;
+            }
+
+            return $docs;
+        }
+
+        return [];
+    }
+
+    /**
+     * Get the documentation table of contents.
+     *
+     * @param  string $doc
      * @param  string $version
      * @return string|null
      */
-    public function getToc($manual, $version)
+    public function getToc($doc, $version)
     {
-        $tocFile = $this->getStoragePath($manual, $version, 'toc.md');
+        $prefix = "$doc/$version";
+        $tocFile = $this->getStoragePath($doc, $version, 'toc.md');
 
         if ($this->files->exists($tocFile)) {
-            return $this->remember("$manual.$version.toc",
-                $this->parse($this->files->get($tocFile), $manual.'/'.$version)
-            );
+            return $this->remember("$doc.$version.toc", function () use ($tocFile, $prefix) {
+                return $this->parse($this->files->get($tocFile), $prefix);
+            });
         }
     }
 
     /**
-     * Get the given documentation page.
+     * Get the documentation page content.
      *
-     * @param  string $manual
+     * @param  string $doc
      * @param  string $version
      * @param  string $page
      * @return string|null
      */
-    public function get($manual, $version, $page)
+    public function getContent($doc, $version, $page)
     {
-        $pageFile = $this->getStoragePath($manual, $version, $page.'.md');
+        $prefix = "$doc/$version/".dirname($page);
+        $pageFile = $this->getStoragePath($doc, $version, $page.'.md');
 
         if ($this->files->exists($pageFile)) {
-            return $this->remember("$manual.$version.$page",
-                $this->parse($this->files->get($pageFile), $manual.'/'.$version.'/'.dirname($page))
-            );
+            return $this->remember("$doc.$version.$page", function () use ($pageFile, $prefix) {
+                return $this->parse($this->files->get($pageFile), $prefix);
+            });
         }
     }
 
     /**
-     * Gets the given documentation page modification time.
+     * Get the documentation versions.
      *
-     * @param  string $manual
-     * @param  string $version
-     * @param  string $page
-     * @return string|null
+     * @param  string $doc
+     * @return array
      */
-    public function getUpdatedTimestamp($manual, $version, $page)
+    public function getVersions($doc)
     {
-        $page = $this->getStoragePath($manual, $version, $page.'.md');
-
-        if ($this->files->exists($page)) {
-            $timestamp = DateTime::createFromFormat('U', filemtime($page));
-
-            return $timestamp->format('l, F d, Y');
+        if ($versions = Arr::get($this->all(), "$doc.versions")) {
+            return $versions;
         }
-    }
 
-    /**
-     * Get all manuals from documentation directory.
-     *
-     * @return array
-     */
-    public function getManuals()
-    {
-        return $this->getDirectories($this->getStoragePath());
-    }
-
-
-    /**
-     * Get all versions for the given manual.
-     *
-     * @param  string $manual
-     * @return array
-     */
-    public function getVersions($manual)
-    {
-        $manualDir = $this->getStoragePath($manual);
-
-        $versions = $this->getDirectories($manualDir);
+        $versions = $this->getDirectories(
+            $this->getStoragePath($doc)
+        );
 
         sort($versions, SORT_NATURAL);
 
@@ -121,14 +145,18 @@ class Documentation
     }
 
 	/**
-	 * Get the default version for the given manual.
+	 * Get the default documentation version.
 	 *
-	 * @param  string $manual
+	 * @param  string $doc
 	 * @return string|null
 	 */
-	public function getDefaultVersion($manual)
+	public function getDefaultVersion($doc)
 	{
-		$versions = array_values($this->getVersions($manual));
+        if ($version = Arr::get($this->all(), "$doc.default_version")) {
+            return $version;
+        }
+
+		$versions = array_values($this->getVersions($doc));
 
         if (count($versions) === 1) {
             return $versions[0];
@@ -143,13 +171,25 @@ class Documentation
         }
 	}
 
+    /**
+     * Get the default documentation page.
+     *
+     * @param  string $doc
+     * @param  string|null $default
+     * @return string|null
+     */
+    public function getDefaultPage($doc, $default = null)
+    {
+        return Arr::get($this->all(), "$doc.default_page", $default);
+    }
+
 	/**
 	 * Return an array of folders within the supplied path.
 	 *
 	 * @param  string $path
 	 * @return array
 	 */
-	protected function getDirectories($path)
+	public function getDirectories($path)
 	{
 		if (! $this->files->exists($path)) {
 			return [];
@@ -189,24 +229,6 @@ class Documentation
 	}
 
     /**
-     * Get an item from the cache, or store the default value forever.
-     *
-     * @param  string $key
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function remember($key, $value)
-    {
-        if (app()->environment('local')) {
-            return $value;
-        }
-
-        return $this->cache->rememberForever($key, function () use ($value) {
-            return $value;
-        });
-    }
-
-    /**
      * Get the storage path.
      *
      * @return string
@@ -220,5 +242,51 @@ class Documentation
         }
 
         return $path.'/'.implode('/', func_get_args());
+    }
+
+    /**
+     * Get an item from the cache, or store the default value forever.
+     *
+     * @param  string   $key
+     * @param  \Closure $callback
+     * @return mixed
+     */
+    protected function remember($key, Closure $callback)
+    {
+        if (app()->environment('local')) {
+            return $callback();
+        }
+
+        return $this->cache->rememberForever($key, $callback);
+    }
+
+    /**
+     * Remove the documentation cache.
+     *
+     * @param  string $doc
+     * @param  string|null $version
+     * @return void
+     */
+    public function clearCache($doc, $version = null)
+    {
+        $this->docs = null;
+        $this->cache->forget('docs.yml');
+
+        if ($version) {
+            $versions = [$version];
+        } else {
+            $versions = array_keys($this->getVersions($doc));
+        }
+
+        foreach ($versions as $version) {
+            $path = $this->getStoragePath($doc, $version);
+
+            $pages = $this->files->files($path);
+
+            foreach ($pages as $page) {
+                $page = substr($page, 0, -3);
+                $this->cache->forget("$doc.$version.$page");
+            }
+        }
     }
 }

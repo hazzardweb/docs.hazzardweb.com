@@ -1,4 +1,4 @@
-@extends('docs.master')
+@extends('layouts.app')
 
 @section('content')
     <nav class="navbar docs-navbar" role="navigation">
@@ -15,8 +15,8 @@
                 </div>
                 <div id="docs-navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="http://codecanyon.net/user/hazzardweb#contact">Support</a></li>
-                        <li><a href="{{ config('app.url') }}">HazzardWeb</a></li>
+                        <li><a href="http://codecanyon.net/user/hazzardweb#contact" target="_blank">Support</a></li>
+                        <li><a href="http://hazzardweb.com" target="_blank">HazzardWeb</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,8 +25,8 @@
 
     <div class="container">
         <div class="col-md-11 col-md-offset-1">
-            @foreach ($manuals as $manual)
-                <h2>&rsaquo; <a href="{{ route('docs.show', $manual) }}">{{ config("docs.manual_names.$manual", $manual) }}</a></h2>
+            @foreach ($docs as $id => $doc)
+                <h2>&rsaquo; <a href="{{ route('show', $id) }}">{{ $doc['name'] }}</a></h2>
             @endforeach
         </div>
     </div>

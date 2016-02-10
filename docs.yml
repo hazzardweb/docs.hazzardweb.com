@@ -1,0 +1,6 @@
+filepicker:
+    name: Filepicker
+    demo: https://demo.hazzardweb.com/filepicker
+    support: http://codecanyon.net/item/filepicker-multi-file-uploader/11557024
+    repository: https://github.com/hazzardweb/filepicker-docs.git
+    default_version: '1.0'

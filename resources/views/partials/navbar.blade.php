@@ -9,9 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="./" class="navbar-brand">
-                    {{ config("docs.manual_names.$currentManual", $currentManual) }}
-                </a>
+                <a href="./" class="navbar-brand">{{ $currentDoc['name'] }}</a>
             </div>
 
             <div id="docs-navbar" class="collapse navbar-collapse">
@@ -26,9 +24,7 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     @foreach ($versions as $version)
-                                        <li>
-                                            <a href="{{ url('/'.$currentManual.'/'. $version) }}">{{ $version }}</a>
-                                        </li>
+                                        <li><a href="{{ route('show', [$currentDoc['id'], $version]) }}">{{ $version }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -46,13 +42,13 @@
                 <div class="docs-nav-toc"></div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    @if ($item = config("docs.urls.$currentManual"))
-                        <li><a href="http://codecanyon.net/item/{{ $item }}/support">Support</a></li>
-                    @else
-                        <li><a href="http://codecanyon.net/user/hazzardweb#contact">Support</a></li>
+                    @if (isset($currentDoc['demo']))
+                        <li><a href="{{ $currentDoc['demo'] }}" target="_blank">Demo</a></li>
                     @endif
 
-                    <li><a href="{{ config('app.url') }}">HazzardWeb</a></li>
+                    <li><a href="{{ $currentDoc['support'] or 'http://codecanyon.net/user/hazzardweb#contact'}}" target="_blank">Support</a></li>
+
+                    <li><a href="http://hazzardweb.com" target="_blank">HazzardWeb</a></li>
                 </ul>
             </div>
         </div>

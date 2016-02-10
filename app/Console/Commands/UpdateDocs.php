@@ -1,8 +1,10 @@
 <?php
 
-namespace Hazzard\Web\Console\Commands;
+namespace App\Console\Commands;
 
 use PHPGit\Git;
+use App\Documentation;
+use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
@@ -13,23 +15,26 @@ class UpdateDocs extends Command
      *
      * @var string
      */
-    protected $signature = 'docs:update {manual?} {version?}';
+    protected $signature = 'docs:update {doc?} {version?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update manuals from GitHub.';
+    protected $description = 'Update docs from GitHub.';
 
     /**
      * Create a new command instance.
      *
-     * @return void
+     * @param \App\Documentation $docs
+     * @param \PHPGit\Git $git
+     * @param Illuminate\Filesystem\Filesystem $files
      */
-    public function __construct(Git $git, Filesystem $files)
+    public function __construct(Documentation $docs, Git $git, Filesystem $files)
     {
         $this->git = $git;
+        $this->docs = $docs;
         $this->files = $files;
 
         parent::__construct();
@@ -42,36 +47,42 @@ class UpdateDocs extends Command
      */
     public function handle()
     {
-        $manual = $this->argument('manual');
+        $doc = $this->argument('doc');
         $version = $this->argument('version');
 
-        if ($manual) {
-            $manuals = [$manual];
+        if ($doc) {
+            $docs = [$doc];
         } else {
-            $manuals = $this->getDirectories(config('docs.path'));
+            $docs = array_keys($this->docs->getDocs());
         }
 
-        foreach ($manuals as $manual) {
-            $this->updateManual($manual, $version);
+        foreach ($docs as $doc) {
+            $this->updateDoc($doc, $version);
         }
 
         $this->info('Docs updated!');
-
-        $this->call('cache:clear');
     }
 
     /**
-     * Update manual.
+     * Update documentation.
      *
-     * @param  string $manual
+     * @param  string $doc
      * @param  string $version
      * @return void
      */
-    protected function updateManual($manual, $version = null)
+    protected function updateDoc($doc, $version = null)
     {
         $path = config('docs.path');
 
-        $this->git->setRepository($path.'/'.$manual);
+        if (! $data = Arr::get($this->docs->getDocs(), $doc)) {
+            return;
+        }
+
+        if (! $this->files->exists("$path/$doc")) {
+            $this->git->clone($data['repository'], "$path/$doc");
+        }
+
+        $this->git->setRepository("$path/$doc");
 
         if ($version) {
             $this->git->pull('origin', $version);
@@ -82,14 +93,16 @@ class UpdateDocs extends Command
         }
 
         foreach ($versions as $version) {
-            $storagePath = storage_path("docs/$manual/$version");
+            $storagePath = storage_path("docs/$doc/$version");
 
-            $this->files->copyDirectory($path.'/'.$manual, $storagePath);
+            $this->files->copyDirectory("$path/$doc", $storagePath);
+
+            $this->docs->clearCache($doc, $version);
         }
     }
 
     /**
-     * Get versions.
+     * Get documentation versions from the repository.
      *
      * @return array
      */
@@ -108,29 +121,5 @@ class UpdateDocs extends Command
         }
 
         return $versions;
-    }
-
-    /**
-     * Get directories.
-     *
-     * @param  string $path
-     * @return array
-     */
-    protected function getDirectories($path)
-    {
-        if (! $this->files->exists($path)) {
-            return [];
-        }
-
-        $folders = [];
-        $directories = $this->files->directories($path);
-
-        foreach ($directories as $dir) {
-            $dir       = str_replace('\\', '/', $dir);
-            $folder    = explode('/', $dir);
-            $folders[] = end($folder);
-        }
-
-        return $folders;
     }
 }

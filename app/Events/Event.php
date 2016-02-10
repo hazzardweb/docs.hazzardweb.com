@@ -1,6 +1,6 @@
 <?php
 
-namespace Hazzard\Web\Events;
+namespace App\Events;
 
 abstract class Event
 {

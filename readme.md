@@ -1,3 +1,3 @@
-## HazzardWeb
+## HazzardWeb Docs
 
-[hazzardweb.com](http://hazzardweb.com)
+[docs.hazzardweb.com](http://docs.hazzardweb.com)
