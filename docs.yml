@@ -1,6 +1,35 @@
 filepicker:
     name: Filepicker
-    demo: https://demo.hazzardweb.com/filepicker
-    support: http://codecanyon.net/item/filepicker-multi-file-uploader/11557024
+    demo: https://demo.hazzardweb.com/filepicker/
+    support: http://codecanyon.net/item/filepicker-multi-file-uploader/11557024/support
     repository: https://github.com/hazzardweb/filepicker-docs.git
-    default_version: '1.0'
+
+easylogin-pro:
+    name: EasyLogin Pro
+    demo: https://demo.hazzardweb.com/easylogin-pro/
+    support: http://codecanyon.net/item/easylogin-pro-user-membership-system/8585802/support
+    repository: https://github.com/hazzardweb/easylogin-pro-docs.git
+
+image-picker:
+    name: Image Picker
+    demo: https://demo.hazzardweb.com/imagepicker/
+    support: http://codecanyon.net/item/imagepicker-uploader-webcam-cropper/6722532/support
+    repository: https://github.com/hazzardweb/imagepicker-docs.git
+
+image-select:
+    name: Image Select
+    demo: https://demo.hazzardweb.com/imageselect/
+    support: http://codecanyon.net/item/-imageselect-upload-webcam-cropper/4745700/support
+    repository: https://github.com/hazzardweb/imageselect-docs.git
+
+ajax-comment-system:
+    name: Ajax Comment System
+    demo: https://demo.hazzardweb.com/ajax-comment-system/
+    support: http://codecanyon.net/item/ajax-comment-system/5299460/support
+    repository: https://github.com/hazzardweb/ajax-comment-system-docs.git
+
+ajax-comment-system-laravel:
+    name: Ajax Comment System - Laravel
+    demo: http://acs-laravel.demo.hazzardweb.com/
+    support: http://codecanyon.net/item/ajax-comment-system-for-laravel/12660889/support
+    repository: https://github.com/hazzardweb/ajax-comment-system-laravel-docs.git
