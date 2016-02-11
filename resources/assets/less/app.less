@@ -1,29 +1,27 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import '../../../node_modules/bootstrap/less/bootstrap';
+@import 'prism';
+@import 'elements/callouts';
+@import 'elements/navbar';
+@import 'sidebar';
+@import 'content';
 
-@import 'docs/prism';
-@import 'docs/callouts';
+@text-color: #525252;
+@font-family-base: "Source Sans Pro", sans-serif;
 
-body {
-    font-family: Roboto, sans-serif;
-    line-height: 1.5em;
-    text-rendering: optimizeLegibility;
+h1, h2, h3, h4 {
     -webkit-font-smoothing: antialiased;
 }
 
 a {
-    color: #26A9FF;
-
-    &:hover,
-    &:focus {
-        color: #0073bf;
+    &:hover, &:focus {
         text-decoration: none;
     }
 }
 
 nav ul {
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 pre {
@@ -32,15 +30,11 @@ pre {
 }
 
 :not(pre) > code {
-    border-radius: 2px;
+    color: #337AB7;
     padding: 1px 4px;
+    border-radius: 2px;
     background-color: rgba(0, 0, 0, 0.06);
-    color: #333;
 }
-
-@import 'docs/navbar';
-@import 'docs/sidebar';
-@import 'docs/content';
 
 .error-page h2 {
     text-align: center;

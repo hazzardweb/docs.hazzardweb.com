@@ -11,13 +11,13 @@
     border-right: 1px solid #eee;
 
     ul li {
-        border-bottom: 1px dashed #eee;
+        padding: 5px 0;
         font-size: 16px;
         margin-bottom: 5px;
-        padding: 5px 0;
+        border-bottom: 1px dashed #eee;
 
         &.active a {
-            color: #26A9FF;
+            color: #337ab7;
             font-weight: bold;
         }
 
@@ -26,22 +26,17 @@
         }
 
         a {
-            color: #666;
-
-            &:hover,
-            &:focus {
-                color: #337ab7;
-            }
+            line-height: 1.5;
         }
 
         ul {
-            margin-bottom: 25px;
+            margin-bottom: 10px;
 
             li {
-                border-bottom: none;
-                margin-bottom: 0;
                 padding: 0;
                 font-size: 14px;
+                margin-bottom: 0;
+                border-bottom: none;
             }
         }
     }

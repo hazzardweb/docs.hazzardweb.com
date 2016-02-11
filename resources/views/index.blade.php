@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <nav class="navbar docs-navbar" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="col-md-11 col-md-offset-1">
                 <div class="navbar-header">
