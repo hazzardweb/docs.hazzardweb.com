@@ -14,7 +14,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "erusev/parsedown": "^1.6",
-        "kzykhys/git": "dev-master"
+        "kzykhys/git": "dev-master",
+        "jacobbennett/pjax": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

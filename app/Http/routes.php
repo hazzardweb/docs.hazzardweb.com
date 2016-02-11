@@ -1,6 +1,6 @@
 <?php
 
-// Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web']], function () {
     Route::get('/', [
         'as'   => 'index',
         'uses' => 'DocsController@index'
@@ -10,4 +10,4 @@
         'as'   => 'show',
         'uses' => 'DocsController@show'
     ]);
-// });
+});

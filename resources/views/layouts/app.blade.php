@@ -10,7 +10,9 @@
         @endif
     </head>
     <body>
-        @yield('content')
+        <div id="pjax-container">
+            @yield('content')
+        </div>
 
         @include('partials.scripts')
     </body>
