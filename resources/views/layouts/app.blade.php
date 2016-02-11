@@ -15,5 +15,6 @@
         </div>
 
         @include('partials.scripts')
+        @include('partials.ga')
     </body>
 </html>
