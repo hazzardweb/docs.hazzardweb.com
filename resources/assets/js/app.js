@@ -1,90 +1,129 @@
-$(document).ready(function () {
-    $(document).pjax('a', '#pjax-container');
+function Docs () {
+    this.init();
+    this.pjax();
+};
 
-    $(document).on('pjax:success', function () {
-        init();
+/**
+ * Initialize.
+ */
+Docs.prototype.init = function () {
+    this.toc = $('.docs-toc');
+    this.content = $('.docs-content');
+
+    this.navbar();
+    this.elements();
+    this.anchorTags();
+    this.activePage();
+};
+
+/**
+ * Initialize pjax.
+ */
+Docs.prototype.pjax = function () {
+    var doc = $(document), _this = this;
+
+    doc.pjax('a', '#pjax-container');
+
+    doc.on('pjax:success', function () {
+        _this.init();
         Prism.highlightAll();
     });
+};
 
-    init();
+/**
+ * Initialize elements: tables, images, iframes, callouts.
+ */
+Docs.prototype.elements = function () {
+    // Tables.
+    this.content.find('table').addClass('table table-striped table-bordered table-hover table-condensed');
 
-    function init () {
-        var toc  = $('.docs-toc'),
-            docs = $('.docs-content');
+    // Images.
+    this.content.find('img').addClass('img-responsive img-thumbnail');
 
-        // Clone toc.
-        var nav = $(toc.html());
-        $('.docs-nav-toc').replaceWith(nav);
-        nav.addClass('nav navbar-nav docs-nav-toc');
+    // Iframes.
+    this.content.find('iframe').each(function () {
+        $(this).wrap('<div class="embed-responsive embed-responsive-16by9"></div>')
+                .addClass('embed-responsive-item');
+    });
 
-        nav.find('>li').each(function () {
-            var li = $(this), p = li.find('p');
+    // Callouts.
+    this.content.find('blockquote:contains(Attention)').addClass('callout callout-danger');
+    this.content.find('blockquote:contains(Danger)').addClass('callout callout-danger');
 
-            if (p.length) {
-                li.addClass('dropdown');
-                li.find('ul').addClass('dropdown-menu');
-                p.replaceWith('<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+p.html()+' <span class="caret"></span></a>');
-            } else {
-                li.find('ul>li').each(function () {
-                    li.after($(this));
-                });
-                li.remove();
-            }
-        });
+    this.content.find('blockquote:contains(Warning)').addClass('callout callout-warning');
+    this.content.find('blockquote:contains(Notice)').addClass('callout callout-warning');
 
-        // Bootstrap the tables.
-        docs.find('table').addClass('table table-striped table-bordered table-hover table-condensed');
+    this.content.find('blockquote:contains(Info)').addClass('callout callout-info');
+    this.content.find('blockquote:contains(Note)').addClass('callout callout-info');
 
-        // Bootstrap the images.
-        docs.find('img').addClass('img-responsive img-thumbnail');
+    this.content.find('blockquote:contains(Hint)').addClass('callout callout-success');
+    this.content.find('blockquote:contains(Tip)').addClass('callout callout-success');
+};
 
-        // Bootstrap the iframes.
-        docs.find('iframe').each(function () {
-            $(this).wrap('<div class="embed-responsive embed-responsive-16by9"></div>')
-                    .addClass('embed-responsive-item');
-        });
+/**
+ * Set the active page.
+ */
+Docs.prototype.activePage = function () {
+    this.toc.find('a[href$="/'+ this.toc.data('current-page') +'"]')
+            .parent().addClass('active');
+};
 
-        // Dynamic callouts.
-        docs.find('blockquote:contains(Attention)').addClass('callout callout-danger');
-        docs.find('blockquote:contains(Danger)').addClass('callout callout-danger');
+/**
+ * Create anchor tags on header spans within documentation.
+ */
+Docs.prototype.anchorTags = function () {
+    this.content.find('h2, h3, h4, h5, h6').each(function () {
+        // Ignore header spans within blockquotes.
+        if ($(this).parent().get(0).tagName !== 'BLOCKQUOTE') {
+            var anchor = $(this).text().toLowerCase().trim(),
+                hyphenNeedle = [/ /g],
+                emptyNeedle  = [/\[/g, /\]/g, /\(/g, /\)/g, /\:/g];
 
-        docs.find('blockquote:contains(Warning)').addClass('callout callout-warning');
-        docs.find('blockquote:contains(Notice)').addClass('callout callout-warning');
+            hyphenNeedle.forEach(function (word) {
+                anchor = anchor.replace(word, "-");
+            });
 
-        docs.find('blockquote:contains(Info)').addClass('callout callout-info');
-        docs.find('blockquote:contains(Note)').addClass('callout callout-info');
+            emptyNeedle.forEach(function (word) {
+                anchor = anchor.replace(word, '');
+            });
 
-        docs.find('blockquote:contains(Hint)').addClass('callout callout-success');
-        docs.find('blockquote:contains(Tip)').addClass('callout callout-success');
+            anchor = anchor.replace(/\./g, '');
 
-        // Set active page.
-        toc.find('a[href$="/'+toc.data('current-page')+'"]').parent().addClass('active');
+            $(this).append(' <a class="header-anchor" id="' + anchor + '" href="#' + anchor + '"></a>');
+        }
+    });
+}
 
-        // Change h1 to h4 for search results.
-        $('#search-results h1').replaceWith(function () {
-            return '<h4>' + $(this).text() + '</h4>';
-        });
+/**
+ * Clone toc to navbar.
+ */
+Docs.prototype.navbar = function () {
+    var nav = $(this.toc.html());
 
-        // Create anchor tags on header spans within documentation.
-        docs.find('h2, h3, h4, h5, h6').each(function () {
-            // We want to ignore header spans within blockquotes
-            if ($(this).parent().get(0).tagName !== 'BLOCKQUOTE') {
-                var anchor = $(this).text().toLowerCase().trim(),
-                    hyphenNeedle = [/ /g],
-                    emptyNeedle = [/\[/g, /\]/g, /\(/g, /\)/g, /\:/g];
+    $('.docs-nav-toc').replaceWith(nav);
 
-                hyphenNeedle.forEach(function(word) {
-                    anchor = anchor.replace(word, "-");
-                });
+    nav.addClass('nav navbar-nav docs-nav-toc');
 
-                emptyNeedle.forEach(function (word) {
-                    anchor = anchor.replace(word, '');
-                });
+    nav.find('>li').each(function () {
+        var li = $(this),
+            header = li.find('p');
 
-                anchor = anchor.replace(/\./g, '');
+        if (header.length) {
+            li.addClass('dropdown');
+            li.find('ul').addClass('dropdown-menu');
 
-                $(this).append(" <a class=\"header-anchor\" id=\"" + anchor + "\" href=\"#" + anchor + "\"></a>");
-            }
-        });
-    }
-});
+            header.replaceWith(
+                '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+ header.html() +
+                ' <span class="caret"></span></a>'
+            );
+        } else {
+            li.find('ul>li').each(function () {
+                li.after($(this));
+            });
+
+            li.remove();
+        }
+    });
+};
+
+new Docs();
