@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="./" class="navbar-brand">{{ $currentDoc['name'] }}</a>
+                <a href="{{ route('show', [$currentDoc['id'], $currentVersion]) }}" class="navbar-brand">{{ $currentDoc['name'] }}</a>
             </div>
 
             <div id="docs-navbar" class="collapse navbar-collapse">
