@@ -10,13 +10,13 @@ easylogin-pro:
     support: http://codecanyon.net/item/easylogin-pro-user-membership-system/8585802/support
     repository: https://github.com/hazzardweb/easylogin-pro-docs.git
 
-image-picker:
+imagepicker:
     name: Image Picker
     demo: https://demo.hazzardweb.com/imagepicker/
     support: http://codecanyon.net/item/imagepicker-uploader-webcam-cropper/6722532/support
     repository: https://github.com/hazzardweb/imagepicker-docs.git
 
-image-select:
+imageselect:
     name: Image Select
     demo: https://demo.hazzardweb.com/imageselect/
     support: http://codecanyon.net/item/-imageselect-upload-webcam-cropper/4745700/support
