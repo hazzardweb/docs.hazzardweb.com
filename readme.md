@@ -4,7 +4,7 @@
 
 ## Installation
 
-- `git clone git@github.com:hazzardweb/docs.hazzardweb.com.git`
+- `git clone https://github.com/hazzardweb/docs.hazzardweb.com.git`
 - `cp .env.example .env`
 - `composer install`
 - `php artisan key:generate`
