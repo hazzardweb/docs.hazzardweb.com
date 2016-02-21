@@ -284,7 +284,8 @@ class Documentation
             $pages = $this->files->files($path);
 
             foreach ($pages as $page) {
-                $page = substr($page, 0, -3);
+                $page = substr(basename($page), 0, -3);
+
                 $this->cache->forget("$doc.$version.$page");
             }
         }
