@@ -29,10 +29,10 @@
         padding-bottom: 20px;
 
         li:before {
-            content: "# ";
-            margin-right: .25em;
-            color: #008CBA;
             opacity: .3;
+            content: "# ";
+            color: #008CBA;
+            margin-right: .25em;
         }
 
         ul {
@@ -63,8 +63,8 @@
         font-weight: normal;
 
         &:before {
-            font-family: 'Glyphicons Halflings';
             content: " \e144";
+            font-family: 'Glyphicons Halflings';
         }
     }
 

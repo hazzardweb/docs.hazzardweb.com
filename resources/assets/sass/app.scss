@@ -1,21 +1,13 @@
-@import '../../../node_modules/bootstrap/less/bootstrap';
+@import 'variables';
+@import '../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import 'prism';
-@import 'elements/callouts';
-@import 'elements/navbar';
+@import 'navbar';
 @import 'sidebar';
 @import 'content';
-
-@text-color: #525252;
-@font-family-base: "Source Sans Pro", sans-serif;
+@import 'callouts';
 
 h1, h2, h3, h4 {
     -webkit-font-smoothing: antialiased;
-}
-
-a {
-    &:hover, &:focus {
-        text-decoration: none;
-    }
 }
 
 nav ul {

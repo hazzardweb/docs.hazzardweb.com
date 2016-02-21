@@ -5,8 +5,8 @@ var elixir = require('laravel-elixir');
 elixir.config.sourcemaps = !elixir.config.production;
 
 elixir(function (mix) {
-	mix.less('app.less')
+	mix.sass('app.scss')
 		.scripts(['vendor', 'app.js'], 'public/js/app.js')
 		.version(['css/app.css', 'js/app.js'])
-        .copy('node_modules/bootstrap/dist/fonts', 'public/build/fonts');
+        .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/*.*', 'public/build/fonts');
 });

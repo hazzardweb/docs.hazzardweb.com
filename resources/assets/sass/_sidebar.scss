@@ -1,13 +1,13 @@
 .docs-sidebar {
-    @media (max-width: 992px) {
+    @media (max-width: $screen-md-min) {
         display: none;
     }
 }
 
 .docs-toc {
-    padding: 45px 20px 45px 0;
-    margin-bottom: 60px;
     top: 51px;
+    margin-bottom: 60px;
+    padding: 45px 20px 45px 0;
     border-right: 1px solid #eee;
 
     ul li {
