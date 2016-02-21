@@ -95,6 +95,8 @@ class UpdateDocs extends Command
         foreach ($versions as $version) {
             $storagePath = storage_path("docs/$doc/$version");
 
+            $this->git->checkout($version);
+
             $this->files->copyDirectory("$path/$doc", $storagePath);
 
             $this->docs->clearCache($doc, $version);
