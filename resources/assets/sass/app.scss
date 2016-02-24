@@ -35,3 +35,13 @@ pre {
         color: #aaa;
     }
 }
+
+.search {
+    .algolia-autocomplete {
+        display: block !important;
+    }
+}
+
+.form-control:focus {
+    box-shadow: none;
+}

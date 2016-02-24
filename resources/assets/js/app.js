@@ -14,6 +14,17 @@ Docs.prototype.init = function () {
     this.elements();
     this.anchorTags();
     this.activePage();
+    this.docsearch();
+};
+
+Docs.prototype.docsearch = function () {
+    if (window.currentDoc) {
+        docsearch({
+            apiKey: window.docApiKey,
+            indexName: window.currentDoc,
+            inputSelector: '#search'
+        });
+    }
 };
 
 /**

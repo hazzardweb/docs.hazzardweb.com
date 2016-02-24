@@ -15,7 +15,13 @@
     			@endif
 
     			<div class="col-md-{{ $toc ? '9' : '12' }} docs-content">
-    				{!! $content !!}
+                    @if ($currentDoc['id'] == 'easylogin-pro')
+                        <div class="form-group search">
+                            <input type="text" class="form-control" id="search" placeholder="Search...">
+                        </div>
+                    @endif
+
+                    {!! $content !!}
     			</div>
     		</div>
         </div>
