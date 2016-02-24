@@ -36,3 +36,17 @@ pre {
         color: #aaa;
     }
 }
+
+.footer {
+    padding: 10px;
+    color: #aeaeae;
+    text-align: center;
+
+    a {
+        color: #aeaeae;
+
+        &:hover, &:focus {
+            color: #23527c;
+        }
+    }
+}
