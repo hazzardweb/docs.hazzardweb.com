@@ -21,7 +21,7 @@ Docs.prototype.docsearch = function () {
     var api = window.algoliaApi,
         doc = window.currentDoc;
 
-    if (doc && api) {
+    if (doc && api && api.key != '') {
         docsearch({
             autocompleteOptions: {
                 // debug: true,
