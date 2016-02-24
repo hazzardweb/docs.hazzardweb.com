@@ -15,15 +15,18 @@
     			@endif
 
     			<div class="col-md-{{ $toc ? '9' : '12' }} docs-content">
-                    @if ($currentDoc['id'] == 'easylogin-pro')
-                        <div class="form-group search">
-                            <input type="text" class="form-control" id="search" placeholder="Search...">
-                        </div>
-                    @endif
+                    @include('partials.search')
 
                     {!! $content !!}
     			</div>
     		</div>
         </div>
 	</div>
+
+    <script>
+        window.currentDoc = {
+            id: '{{ $currentDoc['id'] }}',
+            version: '{{ $currentVersion }}'
+        }
+    </script>
 @stop

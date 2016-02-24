@@ -18,11 +18,24 @@ Docs.prototype.init = function () {
 };
 
 Docs.prototype.docsearch = function () {
-    if (window.currentDoc) {
+    var api = window.algoliaApi,
+        doc = window.currentDoc;
+
+    if (doc && api) {
         docsearch({
-            apiKey: window.docApiKey,
-            indexName: window.currentDoc,
-            inputSelector: '#search'
+            autocompleteOptions: {
+                // debug: true,
+            },
+            apiKey: api.key,
+            indexName: api.index,
+            inputSelector: '#search',
+            algoliaOptions: {
+                'hitsPerPage': 5,
+                'facetFilters': [
+                    'project:' + doc.id,
+                    'version:' + doc.version
+                ]
+            }
         });
     }
 };

@@ -38,4 +38,9 @@ return [
     'ga' => [
         'tracking_id' => env('GA_TRACKING_ID'),
     ],
+
+    'algolia' => [
+        'key'   => env('ALGOLIA_KEY'),
+        'index' => env('ALGOLIA_INDEX', 'hazzardweb')
+    ]
 ];

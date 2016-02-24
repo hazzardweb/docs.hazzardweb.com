@@ -5,6 +5,7 @@
 @import 'sidebar';
 @import 'content';
 @import 'callouts';
+@import 'search';
 
 h1, h2, h3, h4 {
     -webkit-font-smoothing: antialiased;
@@ -34,14 +35,4 @@ pre {
     span {
         color: #aaa;
     }
-}
-
-.search {
-    .algolia-autocomplete {
-        display: block !important;
-    }
-}
-
-.form-control:focus {
-    box-shadow: none;
 }

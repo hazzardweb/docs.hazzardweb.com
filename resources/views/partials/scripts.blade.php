@@ -1,8 +1,8 @@
 <script>
-    @if (isset($currentDoc) && $currentDoc['id'] == 'easylogin-pro')
-        window.currentDoc = '{{ $currentDoc['id'] }}';
-        window.docApiKey = 'd0264c81489389720e0b93bcfeb7ec9b';
-    @endif
+    window.algoliaApi = {
+        key: '{{ config('services.algolia.key') }}',
+        index: '{{ config('services.algolia.index') }}'
+    };
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
