@@ -17,12 +17,15 @@ Docs.prototype.init = function () {
     this.docsearch();
 };
 
+/**
+ * Initialize Algolia docsearch.
+ */
 Docs.prototype.docsearch = function () {
     var api = window.algoliaApi,
         doc = window.currentDoc;
 
     if (doc && api && api.key != '') {
-        docsearch({
+        var search = docsearch({
             autocompleteOptions: {
                 // debug: true,
             },
@@ -37,8 +40,41 @@ Docs.prototype.docsearch = function () {
                 ]
             }
         });
+
+        var _this = this;
+
+        search.autocomplete.off('autocomplete:selected');
+        search.autocomplete.on('autocomplete:selected', function (e, suggestion) {
+            search.autocomplete.autocomplete.setVal('');
+            _this.handleClick(e, suggestion.url);
+        });
     }
 };
+
+/**
+ * Handle docsearch click.
+ *
+ * @param {Object} e
+ * @param {String} url
+ */
+Docs.prototype.handleClick = function (e, url) {
+    url = url.replace('#pjax-container', '');
+    // url = url.replace('.com', '.app');
+
+    var link = $('<a>', {href: url})[0];
+
+    // Reload if not the same protocol and host.
+    if (location.protocol !== link.protocol || location.hostname !== link.hostname ||
+           (link.href.indexOf('#') > -1 && stripHash(link) == stripHash(location))) {
+        location.href = link.href;
+    }
+
+    $.pjax.click($.Event('click', {currentTarget: link}), '#pjax-container');
+}
+
+function stripHash (location) {
+    return location.href.replace(/#.*/, '');
+}
 
 /**
  * Initialize pjax.
@@ -48,11 +84,33 @@ Docs.prototype.pjax = function () {
 
     doc.pjax('a', '#pjax-container');
 
-    doc.on('pjax:success', function () {
+    doc.on('pjax:success', function (e, data, status, xhr, options) {
         _this.init();
+        _this.scrollTo();
         Prism.highlightAll();
     });
 };
+
+/**
+ * Scroll to the element referenced by the URL anchor.
+ */
+Docs.prototype.scrollTo = function () {
+    var scrollTo = 0;
+    var hash = location.hash;
+
+    if (hash) {
+        var name = decodeURIComponent(hash.slice(1))
+        var target = document.getElementById(name) || document.getElementsByName(name)[0]
+
+        if (target) {
+            scrollTo = $(target).offset().top;
+        }
+    }
+
+    if (typeof scrollTo == 'number') {
+        $(window).scrollTop(scrollTo - 12);
+    }
+}
 
 /**
  * Initialize elements: tables, images, iframes, callouts.
@@ -104,7 +162,7 @@ Docs.prototype.anchorTags = function () {
                 emptyNeedle  = [/\[/g, /\]/g, /\(/g, /\)/g, /\:/g];
 
             hyphenNeedle.forEach(function (word) {
-                anchor = anchor.replace(word, "-");
+                anchor = anchor.replace(word, '-');
             });
 
             emptyNeedle.forEach(function (word) {
