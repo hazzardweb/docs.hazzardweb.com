@@ -84,18 +84,23 @@ class UpdateDocs extends Command
 
         $this->git->setRepository("$path/$doc");
 
+        $this->git->checkout('master');
+        $this->git->pull('origin');
+
         if ($version) {
-            $this->git->pull('origin', $version);
             $versions = [$version];
         } else {
-            $this->git->pull('origin');
             $versions = $this->getVersions();
         }
 
         foreach ($versions as $version) {
-            $storagePath = storage_path("docs/$doc/$version");
+            $this->git->checkout($version);
+
+            $this->git->pull('origin', $version);
 
             $this->git->checkout($version);
+
+            $storagePath = storage_path("docs/$doc/$version");
 
             $this->files->copyDirectory("$path/$doc", $storagePath);
 
