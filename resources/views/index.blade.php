@@ -26,7 +26,9 @@
     <div class="container">
         <div class="col-md-11 col-md-offset-1">
             @foreach ($docs as $id => $doc)
+                @if ($doc['id'] !== 'ajax-comment-system-laravel')
                 <h2>&rsaquo; <a href="{{ route('show', $id) }}">{{ $doc['name'] }}</a></h2>
+                @endif
             @endforeach
         </div>
     </div>
