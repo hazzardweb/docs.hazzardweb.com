@@ -33,3 +33,9 @@ ajax-comment-system-laravel:
     demo: http://acs-laravel.demo.hazzardweb.com/
     support: http://codecanyon.net/item/ajax-comment-system-for-laravel/12660889/support
     repository: https://github.com/hazzardweb/ajax-comment-system-laravel-docs.git
+
+laravel-comments:
+    name: Laravel Comments
+    demo: https://laravel-comments.demo.hazzardweb.com/
+    support: http://codecanyon.net/item/ajax-comment-system-for-laravel/12660889/support
+    repository: https://github.com/hazzardweb/laravel-comments-docs.git
