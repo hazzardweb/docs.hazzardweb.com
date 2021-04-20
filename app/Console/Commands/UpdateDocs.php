@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use PHPGit\Git;
 use App\Documentation;
+use Cz\Git\GitRepository;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
@@ -25,28 +26,18 @@ class UpdateDocs extends Command
     protected $description = 'Update docs from GitHub.';
 
     /**
-     * Create a new command instance.
+     * Execute the console command.
      *
-     * @param \App\Documentation $docs
-     * @param \PHPGit\Git $git
-     * @param Illuminate\Filesystem\Filesystem $files
+     * @param  \App\Documentation $docs
+     * @param  \PHPGit\Git $git
+     * @param  Illuminate\Filesystem\Filesystem $files
+     * @return mixed
      */
-    public function __construct(Documentation $docs, Git $git, Filesystem $files)
+    public function handle(Documentation $docs, Filesystem $files)
     {
-        $this->git = $git;
         $this->docs = $docs;
         $this->files = $files;
 
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
         $doc = $this->argument('doc');
         $version = $this->argument('version');
 
@@ -79,26 +70,26 @@ class UpdateDocs extends Command
         }
 
         if (! $this->files->exists("$path/$doc")) {
-            $this->git->clone($data['repository'], "$path/$doc");
+            GitRepository::cloneRepository($data['repository'], "$path/$doc");
         }
 
-        $this->git->setRepository("$path/$doc");
+        $repo = new GitRepository("$path/$doc");
 
-        $this->git->checkout('master');
-        $this->git->pull('origin');
+        $repo->checkout('master');
+        $repo->pull('origin');
 
         if ($version) {
             $versions = [$version];
         } else {
-            $versions = $this->getVersions();
+            $versions = $this->getVersions($repo->getBranches());
         }
 
         foreach ($versions as $version) {
-            $this->git->checkout($version);
+            $repo->checkout($version);
 
-            $this->git->pull('origin', $version);
+            $repo->pull('origin', [$version]);
 
-            $this->git->checkout($version);
+            $repo->checkout($version);
 
             $storagePath = storage_path("docs/$doc/$version");
 
@@ -111,18 +102,17 @@ class UpdateDocs extends Command
     /**
      * Get documentation versions from the repository.
      *
+     * @param  array $branches
      * @return array
      */
-    protected function getVersions()
+    protected function getVersions(array $branches)
     {
         $versions = [];
 
-        $branches = $this->git->branch(['all' => true]);
-
         foreach ($branches as $branch) {
-            preg_match('/origin\/(.*)/', $branch['name'], $matches);
+            preg_match('/origin\/(.*)/', $branch, $matches);
 
-            if (isset($matches[1]) && $matches[1] !== 'HEAD') {
+            if (isset($matches[1]) && ! Str::contains($matches[1], 'HEAD ->')) {
                 $versions[] = $matches[1];
             }
         }

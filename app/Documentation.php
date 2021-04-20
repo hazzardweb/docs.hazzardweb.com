@@ -12,20 +12,20 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 
 class Documentation
 {
-	/**
-	 * @var \Illuminate\Filesystem\Filesystem
-	 */
-	protected $files;
+    /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $files;
 
-	/**
-	 * @var \Illuminate\Contracts\Cache\Repository
-	 */
-	protected $cache;
+    /**
+     * @var \Illuminate\Contracts\Cache\Repository
+     */
+    protected $cache;
 
-	/**
-	 * @var \Parsedown
-	 */
-	protected $parsedown;
+    /**
+     * @var \Parsedown
+     */
+    protected $parsedown;
 
     /**
      * @var array
@@ -40,11 +40,11 @@ class Documentation
      * @param Parsedown  $parsedown
      */
     public function __construct(Filesystem $files, Cache $cache, Parsedown $parsedown)
-	{
+    {
         $this->files = $files;
         $this->cache = $cache;
         $this->parsedown = $parsedown;
-	}
+    }
 
     /**
      * Get all the available documentations from cache or file.
@@ -144,19 +144,19 @@ class Documentation
         return array_reverse($versions);
     }
 
-	/**
-	 * Get the default documentation version.
-	 *
-	 * @param  string $doc
-	 * @return string|null
-	 */
-	public function getDefaultVersion($doc)
-	{
+    /**
+     * Get the default documentation version.
+     *
+     * @param  string $doc
+     * @return string|null
+     */
+    public function getDefaultVersion($doc)
+    {
         if ($version = Arr::get($this->all(), "$doc.default_version")) {
             return $version;
         }
 
-		$versions = array_values($this->getVersions($doc));
+        $versions = array_values($this->getVersions($doc));
 
         if (count($versions) === 1) {
             return $versions[0];
@@ -169,7 +169,7 @@ class Documentation
 
             return $versions[0];
         }
-	}
+    }
 
     /**
      * Get the default documentation page.
@@ -183,50 +183,50 @@ class Documentation
         return Arr::get($this->all(), "$doc.default_page", $default);
     }
 
-	/**
-	 * Return an array of folders within the supplied path.
-	 *
-	 * @param  string $path
-	 * @return array
-	 */
-	public function getDirectories($path)
-	{
-		if (! $this->files->exists($path)) {
-			return [];
-		}
+    /**
+     * Return an array of folders within the supplied path.
+     *
+     * @param  string $path
+     * @return array
+     */
+    public function getDirectories($path)
+    {
+        if (! $this->files->exists($path)) {
+            return [];
+        }
 
-		$folders = [];
-		$directories = $this->files->directories($path);
+        $folders = [];
+        $directories = $this->files->directories($path);
 
-		foreach ($directories as $dir) {
-			$dir       = str_replace('\\', '/', $dir);
-			$folder    = explode('/', $dir);
-			$folders[] = end($folder);
-		}
+        foreach ($directories as $dir) {
+            $dir       = str_replace('\\', '/', $dir);
+            $folder    = explode('/', $dir);
+            $folders[] = end($folder);
+        }
 
-		return $folders;
-	}
+        return $folders;
+    }
 
-	/**
-	 * Convert text from Markdown to HTML.
-	 *
-	 * @param  string $text
-	 * @return string
-	 */
-	protected function parse($text, $pathPrefix = '')
-	{
-		$basePath = url('/' . ltrim($pathPrefix, '/'));
+    /**
+     * Convert text from Markdown to HTML.
+     *
+     * @param  string $text
+     * @return string
+     */
+    protected function parse($text, $pathPrefix = '')
+    {
+        $basePath = url('/' . ltrim($pathPrefix, '/'));
 
-		$rendered = $this->parsedown->text($text);
+        $rendered = $this->parsedown->text($text);
 
-		// Replace absolute relative paths (paths that start with / but not //).
-		$rendered = preg_replace('/href=\"(\/[^\/].+?).md(#?.*?)\"/', "href=\"$basePath$1$2\"", $rendered);
+        // Replace absolute relative paths (paths that start with / but not //).
+        $rendered = preg_replace('/href=\"(\/[^\/].+?).md(#?.*?)\"/', "href=\"$basePath$1$2\"", $rendered);
 
-		// Replace relative paths (paths that don't start with / or http://, https://, //, etc).
-		$rendered = preg_replace('/href=\"(?!.*?\/\/)(.+?).md(#?.*?)\"/', "href=\"$basePath/$1$2\"", $rendered);
+        // Replace relative paths (paths that don't start with / or http://, https://, //, etc).
+        $rendered = preg_replace('/href=\"(?!.*?\/\/)(.+?).md(#?.*?)\"/', "href=\"$basePath/$1$2\"", $rendered);
 
-		return $rendered;
-	}
+        return $rendered;
+    }
 
     /**
      * Get the storage path.
